@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ngupload by twilson63</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Ngupload</h1>
+        <p>An AngularJS Service for uploading files using iframe</p>
+
+        <p class="view"><a href="https://github.com/twilson63/ngUpload">View the Project on GitHub <small>twilson63/ngUpload</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/twilson63/ngUpload/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/twilson63/ngUpload/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/twilson63/ngUpload">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>ngUpload</h1>
+
+<p>A simple iframe upload service for AngularJS</p>
+
+<h2>Usage</h2>
+
+<p>Add to your html file</p>
+
+<pre><code>&lt;script src="/services/upload.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Inject module into your application</p>
+
+<pre><code>var app = angular.module('myApp', ['ngUpload']);
+</code></pre>
+
+<p>Create a basic form with a file input element</p>
+
+<pre><code>&lt;form action="/upload"&gt;
+  &lt;input type="file" name="logo"&gt;&lt;/input&gt;
+  &lt;button ng-click="upload()"&gt;Upload&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>In your controller, capture the upload event
+and call upload.submit</p>
+
+<pre><code>app.controller('Index', function($scope, upload) {
+  $scope.upload = function() {
+    upload.submit(function(content){
+      // handle response back....
+    });
+  }
+});
+</code></pre>
+
+<h2>How to contribute</h2>
+
+<p>pull requests welcome.</p>
+
+<h2>Thanks</h2>
+
+<ul>
+<li>AngularJS Team</li>
+<li>NodeJS Team</li>
+<li>JavaScript Team</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/twilson63">twilson63</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
