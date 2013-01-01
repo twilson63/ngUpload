@@ -38,6 +38,10 @@ app.controller('Index', function($scope, upload) {
 });
 ```
 
+## License
+
+MIT
+
 ## How to contribute
 
 pull requests welcome.
