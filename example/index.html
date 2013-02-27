@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf8"></meta>
+    <title>ngUpload - Example</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    
+  </head>
+  <body>
+    <div class="container" ng-app="app">
+      <div ng-controller="mainCtrl">
+        <h1>{{foo}}</h1>
+        <form action="/upload" method="POST" ng-upload="bar()">
+          <p>
+            <label>Select File</label>
+            <input type="file" name="foo"></input>
+          </p>
+          <p>
+            <input type="submit" class="btn" value="Submit"></input>
+          </p>
+        </form>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+    <script src="/ng-upload.js"></script>
+    <script type="text/javascript">
+      // TODO add ng-upload module
+      var app = angular.module('app', ['ng-upload']);
+      app.controller('mainCtrl', function($scope) {
+        $scope.foo = "Hello World";
+        $scope.bar = function(content) {
+          console.log(content);
+        }
+      });
+    </script>
+  </body>
+</html>

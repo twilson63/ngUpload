@@ -1,40 +1,35 @@
 # ngUpload
 
-A simple iframe upload service for AngularJS
+An AngularJS file upload directive.  
 
 ## Usage
 
 Add to your html file
 
 ```
-<script src="/services/upload.js"></script>
-```
-
-Inject module into your application
-
-```
-var app = angular.module('myApp', ['ngUpload']);
+<script src="/js/ng-upload.js"></script>
 ```
 
 Create a basic form with a file input element
 
-```
-<form action="/upload">
-  <input type="file" name="logo"></input>
-  <button ng-click="upload()">Upload</button>
-</form>
+``` html
+<div ng-app="app">
+  <div ng-controller="mainCtrl">
+   <form action="/uploads" ng-upload="results()"> 
+     <input type="file" name="avatar"></input>
+     <input type="submit" value="Upload"></input>
+   </form>
+ </div>
+</div>
+
 ```
 
-In your controller, capture the upload event
-and call upload.submit
-
-```
-app.controller('Index', function($scope, upload) {
-  $scope.upload = function() {
-    upload.submit(function(content){
-      // handle response back....
-    });
-  }
+``` js
+angular.module('app', ['ng-upload'])
+  .controller('mainCtrl', function($scope) {
+    $scope.results = function(content) {
+      console.log(content);
+    }  
 });
 ```
 
