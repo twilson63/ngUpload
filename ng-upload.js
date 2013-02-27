@@ -1,3 +1,7 @@
+// ng-upload
+//
+// version 0.0.2
+//
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without

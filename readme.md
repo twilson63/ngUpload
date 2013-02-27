@@ -2,6 +2,16 @@
 
 An AngularJS file upload directive.  
 
+## Update
+
+Instead of treating this as a service, I have converted ngUpload to 
+an AngularJS Directive, this way you do not have to deal with id's when referencing the form element.  The only drawback is the requirement to use jQuery to normalize the pulling of iFrame contents on a completed response from the server.  
+
+## Requirements
+
+* AngularJS
+* JQuery
+
 ## Usage
 
 Add to your html file
@@ -32,6 +42,10 @@ angular.module('app', ['ng-upload'])
     }  
 });
 ```
+
+## Example
+
+see `example` folder
 
 ## License
 
