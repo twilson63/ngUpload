@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Ngupload by twilson63</title>
+    <title>ngUpload by twilson63</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Ngupload</h1>
+        <h1>ngUpload</h1>
         <p>An AngularJS Service for uploading files using iframe</p>
 
         <p class="view"><a href="https://github.com/twilson63/ngUpload">View the Project on GitHub <small>twilson63/ngUpload</small></a></p>
@@ -30,39 +30,53 @@
       <section>
         <h1>ngUpload</h1>
 
-<p>A simple iframe upload service for AngularJS</p>
+<p>An AngularJS file upload directive.  </p>
 
-<h2>Usage</h2>
+<h2>Update</h2>
+
+<p>Instead of treating this as a service, I have converted ngUpload to 
+an AngularJS Directive, this way you do not have to deal with id's when referencing the form element.  The only drawback is the requirement to use jQuery to normalize the pulling of iFrame contents on a completed response from the server.  </p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>AngularJS</li>
+<li>JQuery</li>
+</ul><h2>Usage</h2>
 
 <p>Add to your html file</p>
 
-<pre><code>&lt;script src="/services/upload.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p>Inject module into your application</p>
-
-<pre><code>var app = angular.module('myApp', ['ngUpload']);
+<pre><code>&lt;script src="/js/ng-upload.js"&gt;&lt;/script&gt;
 </code></pre>
 
 <p>Create a basic form with a file input element</p>
 
-<pre><code>&lt;form action="/upload"&gt;
-  &lt;input type="file" name="logo"&gt;&lt;/input&gt;
-  &lt;button ng-click="upload()"&gt;Upload&lt;/button&gt;
-&lt;/form&gt;
-</code></pre>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload=</span><span class="s">"results()"</span><span class="nt">&gt;</span> 
+     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
+     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Upload"</span><span class="nt">&gt;&lt;/input&gt;</span>
+   <span class="nt">&lt;/form&gt;</span>
+ <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 
-<p>In your controller, capture the upload event
-and call upload.submit</p>
+</pre></div>
 
-<pre><code>app.controller('Index', function($scope, upload) {
-  $scope.upload = function() {
-    upload.submit(function(content){
-      // handle response back....
-    });
-  }
-});
-</code></pre>
+<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'ng-upload'</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'mainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+    <span class="p">}</span>  
+<span class="p">});</span>
+</pre></div>
+
+<h2>Example</h2>
+
+<p>see <code>example</code> folder</p>
+
+<h2>License</h2>
+
+<p>MIT</p>
 
 <h2>How to contribute</h2>
 
