@@ -27,7 +27,7 @@ Create a basic form with a file input element
   <div ng-controller="mainCtrl">
    <form action="/uploads" ng-upload="results()"> 
      <input type="file" name="avatar"></input>
-     <input type="submit upload-submit" value="Upload"></input>
+     <input type="submit" class="upload-submit" value="Upload"></input>
    </form>
  </div>
 </div>
@@ -67,7 +67,7 @@ angular.module('app', ['ngUpload'])
 
 ## Example
 
-Example of forms that posts to ASP.Net MVC or NodeJS server are now include under the [/examples](https://github.com/adebisi-fa/ngUpload/tree/master/examples) folder.
+Example of forms that posts to ASP.Net MVC or NodeJS server are now included under the [/examples](https://github.com/adebisi-fa/ngUpload/tree/master/examples) folder.
 
 Live examples of the ASP.Net MVC sample can be found at http://ng-upload.azurewebsites.net
 
@@ -78,6 +78,10 @@ MIT
 ## How to contribute
 
 pull requests welcome.
+
+## Contributors
+
+* ADEBISI Foluso A. (https://github.com/adebisi-fa)
 
 ## Thanks
 

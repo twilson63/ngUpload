@@ -1,3 +1,4 @@
+// Version 0.1.0
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -12,7 +13,7 @@
 //  </div>
 // </div>
 //
-//  angular.module('app', ['ng-upload'])
+//  angular.module('app', ['ngUpload'])
 //    .controller('mainCtrl', function($scope) {
 //      $scope.results = function(content) {
 //        console.log(content);
@@ -64,7 +65,7 @@ angular.module('ngUpload', [])
                           scope.$apply(function () { callbackFn(content); });
 
                           // remove iframe
-                          setTimeout(function () { iframe.remove() }, 250);
+                          setTimeout(function () { iframe.remove(); }, 250);
 
                           //if (options.enableControls == null || !(options.enableControls.length >= 0))
                           submitControl.attr('disabled', null);
@@ -73,7 +74,7 @@ angular.module('ngUpload', [])
 
                       // add the new iframe to application
                       element.parent().append(iframe);
-                  }
+                  };
 
                   // 1) get the upload submit control(s) on the form (submitters must be decorated with the 'ng-upload-submit' class)
                   // 2) attach a handler to the controls' click event
@@ -82,10 +83,10 @@ angular.module('ngUpload', [])
 
                           scope.$apply(function () { callbackFn('Please wait...'); });
 
-                          console.log(angular.toJson(options));
+                          //console.log(angular.toJson(options));
 
                           var enabled = true;
-                          if (options.enableControls == null || !(options.enableControls.length >= 0)) {
+                          if (options.enableControls === null || options.enableControls.length === 0) {
                               // disable the submit control on click
                               $(this).attr('disabled', 'disabled');
                               enabled = false;
@@ -103,5 +104,5 @@ angular.module('ngUpload', [])
               else
                   console.log("No callback function found on the ngUpload directive.");
           }
-      }
+      };
   });
