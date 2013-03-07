@@ -29,7 +29,7 @@ angular.module('ngUpload', [])
               // Options (just 1 for now) 
               // Each option should be prefixed with 'upload-Options-' or 'uploadOptions'
               // {
-              //    // specify whether to disable the submit button when uploading forms
+              //    // specify whether to enable the submit button when uploading forms
               //    enableControls: bool 
               // }
               var options = {};
@@ -55,22 +55,20 @@ angular.module('ngUpload', [])
                       // attach function to load event of the iframe
                       iframe.bind('load', function () {
 
-                          //remove listener
-                          iframe.unbind('load');
+                              // get content - requires jQuery
+                              var content = iframe.contents().find('body').text();
 
-                          // get content - requires jQuery
-                          var content = iframe.contents().find('body').text();
+                              // execute the upload response function in the active scope
+                              scope.$apply(function () { callbackFn(content); });
 
-                          // execute the upload response function in the active scope
-                          scope.$apply(function () { callbackFn(content); });
+                              // remove iframe
+                              if (content != "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
+                                  setTimeout(function () { iframe.remove(); }, 250);
 
-                          // remove iframe
-                          setTimeout(function () { iframe.remove(); }, 250);
-
-                          //if (options.enableControls == null || !(options.enableControls.length >= 0))
-                          submitControl.attr('disabled', null);
-                          submitControl.attr('title', 'Click to start upload.');
-                      });
+                              //if (options.enableControls == null || !(options.enableControls.length >= 0))
+                              submitControl.attr('disabled', null);
+                              submitControl.attr('title', 'Click to start upload.');
+                          });
 
                       // add the new iframe to application
                       element.parent().append(iframe);
@@ -81,20 +79,20 @@ angular.module('ngUpload', [])
                   $('.upload-submit', element).click(
                       function () {
 
-                          scope.$apply(function () { callbackFn('Please wait...'); });
+                          addNewDisposableIframe($(this) /* pass the submit control */);
+
+                          scope.$apply(function () { callbackFn("Please wait..."); });
 
                           //console.log(angular.toJson(options));
 
                           var enabled = true;
-                          if (options.enableControls === null || options.enableControls.length === 0) {
+                          if (options.enableControls === null || options.enableControls === undefined || options.enableControls.length >= 0) {
                               // disable the submit control on click
                               $(this).attr('disabled', 'disabled');
                               enabled = false;
                           }
 
                           $(this).attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
-
-                          addNewDisposableIframe($(this) /* pass the submit control */);
 
                           // submit the form
                           $(element).submit();
