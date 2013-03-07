@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf8" />
+    <title>ngUpload - Examples</title>
+    <link href="libs/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            font-family: Verdana;
+            font-size: 12px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: normal;
+            border-bottom: 1px solid gray;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-app="ngUploadApp">
+        <div ng-controller="Example1Ctrl">
+            <h1>Example 1 - Running with default configuration</h1>
+            <span>Current value of foo is: <b>{{foo}}</b>. <i>(Works with the active $scope.)</i></span>
+            <br />
+            <br />
+            <form ng-upload="bar" action="/upload?delay=yes">
+                <p>
+                    <label>Select a file to upload:</label>
+                    <input type="file" name="file" />
+                </p>
+                <p>
+                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <br />
+                    <i>Button is <b>disabled</b> during upload, by default. (See Example 2 to change this).</i>
+                </p>
+            </form>
+            <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
+        </div>
+        <div ng-controller="Example2Ctrl">
+            <h1>Example 2 - Using Options: <b>uploadOptionsEnableControls</b> option</h1>
+            Add or remove this option to enable or disable the submit control(s) during file upload, respectively.
+            <br />
+            <span>Note that this can also be written as:<br />
+                <ul>
+                    <li>upload-options-enable-controls; or </li>
+                    <li>uploadOptionsEnableControls</li>
+                </ul>
+                It is absent by default; hence, submit controls(s) will be disabled while upload is in progress. In this example, uploadOptionsEnableButtons is present or set, which means the submit button will be enabled during the upload.
+            </span>
+            <br />
+            <br />
+            <form ng-upload="uploadFile" action="/upload?delay=yes" upload-options-enable-controls>
+                <p>
+                    <label>Select a file to upload:</label>
+                    <input type="file" name="file" />
+                </p>
+                <p>
+                    <input type="submit" class="btn upload-submit" value="Submit" />
+                </p>
+            </form>
+            <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
+        </div>
+        <div ng-controller="Example3Ctrl">
+            <h1>Example 3 - Submitting forms with any html element</h1>
+            <span>This examples show how to use any html element to submit your form.  It makes use of a 'div', an 'a', and an 'img' tags to submit the same form.</span>
+            <br />
+            <form ng-upload="uploadFile" action="/upload?delay=yes">
+                <p>
+                    <label>Select a file to upload:</label>
+                    <input type="file" name="file" />
+                </p>
+                <div style="width:550px">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="upload-submit" style="text-align: center; cursor: pointer; padding: 10px; background-color: black; color: white;">
+                                With a div
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <a class="upload-submit" href="javascript:void(0)" style="padding: 10px; display: block;">With a link.</a>
+                        </div>
+                        <div class="span4">
+                            <button class="btn btn-small btn-primary upload-submit"><i class="icon-arrow-up icon-white"></i>&nbsp;With an image button.</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
+        </div>
+    </div>
+    <script src="libs/js/jquery-1.9.1.min.js"></script>
+    <script src="libs/js/angular.min.js"></script>
+    <script src="libs/js/ng-upload.js"></script>
+    <script type="text/javascript">
+        // TODO add ng-upload module
+        var app = angular.module('ngUploadApp', ['ngUpload']);
+        app.controller('Example1Ctrl', function ($scope) {
+            $scope.foo = "Hello World";
+            $scope.bar = function (content) {
+                console.log(content);
+                $scope.uploadResponse = content;
+            }
+        });
+
+        app.controller('Example2Ctrl', function ($scope) {
+            $scope.uploadFile = function (content) {
+                console.log(content);
+                $scope.uploadResponse = content;
+            }
+        });
+
+        app.controller('Example3Ctrl', function ($scope) {
+            $scope.uploadFile = function (content) {
+                console.log(content);
+                $scope.uploadResponse = content;
+            }
+        });
+    </script>
+</body>
+</html>
