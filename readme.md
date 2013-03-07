@@ -69,7 +69,9 @@ angular.module('app', ['ngUpload'])
 
 Example of forms that posts to ASP.Net MVC or NodeJS server are now included under the [/examples](https://github.com/adebisi-fa/ngUpload/tree/master/examples) folder.
 
-Live examples of the ASP.Net MVC sample can be found at http://ng-upload.azurewebsites.net
+Live demo of the ASP.Net MVC example can be found at http://ng-upload.azurewebsites.net  
+
+Live demo of the NodeJS example can be found at http://ng-upload.eu01.aws.af.cm
 
 ## License
 
