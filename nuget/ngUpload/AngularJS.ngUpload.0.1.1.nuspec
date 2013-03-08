@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>AngularJS.ngUpload</id>
+        <version>0.1.1</version>
+        <title>AngularJS.ngUpload - (using iFrame)</title>
+        <authors>Tom Wilson,Adebisi-Fa</authors>
+        <owners>Tom Wilson</owners>
+        <projectUrl>http://twilson63.github.com/ngUpload</projectUrl>
+        <iconUrl>http://altdstore.blob.core.windows.net/ngupload/ngUpload-Nuget-Logo.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An AngularJS Directive that uses hidden iFrame for uploading files. It works across browsers (even non-HTML5 complaint one) down to IE6.</description>
+        <summary />
+        <language>en-US</language>
+        <dependencies>
+            <dependency id="jQuery" version="1.9.1" />
+            <dependency id="angularjs" version="1.0.5" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\..\examples\nodejs\libs\css\images\glyphicons-halflings-white.png" target="content\Content\css\images\glyphicons-halflings-white.png" />
+        <file src="..\..\examples\nodejs\libs\css\images\glyphicons-halflings.png" target="content\Content\css\images\glyphicons-halflings.png" />
+        <file src="..\..\examples\nodejs\libs\css\bootstrap.min.css" target="content\Content\css\bootstrap.min.css" />
+        <file src="..\..\ng-upload.js" target="content\Scripts\ng-upload.js" />
+        <file src="..\..\ng-upload.min.js" target="content\Scripts\ng-upload.min.js" />
+        <file src="..\..\examples\nodejs\index.html" target="content\ng-upload-sample.html" />
+    </files>
+</package>
