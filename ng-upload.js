@@ -34,7 +34,7 @@ angular.module('ngUpload', [])
               // }
               var options = {};
               options.enableControls = attrs['uploadOptionsEnableControls'];
-
+              
               // get scope function to execute on successful form upload
               if (attrs['ngUpload']) {
 
@@ -45,7 +45,7 @@ angular.module('ngUpload', [])
 
                   // Retrieve the callback function
                   var fn = attrs['ngUpload'].split('(')[0];
-                  var callbackFn = scope[fn];
+                  var callbackFn = scope.$eval(fn);
 
                   // Helper function to create new iframe for each form submission
                   var addNewDisposableIframe = function (submitControl) {
@@ -59,7 +59,7 @@ angular.module('ngUpload', [])
                               var content = iframe.contents().find('body').text();
 
                               // execute the upload response function in the active scope
-                              scope.$apply(function () { callbackFn(content); });
+                              scope.$apply(function () { callbackFn(content, true /* upload completed */); });
 
                               // remove iframe
                               if (content != "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
@@ -81,7 +81,7 @@ angular.module('ngUpload', [])
 
                           addNewDisposableIframe($(this) /* pass the submit control */);
 
-                          scope.$apply(function () { callbackFn("Please wait..."); });
+                          scope.$apply(function () { callbackFn("Please wait...", false /* upload not completed */); });
 
                           //console.log(angular.toJson(options));
 
