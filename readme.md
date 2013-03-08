@@ -73,6 +73,16 @@ Live demo of the ASP.Net MVC example can be found at http://ng-upload.azurewebsi
 
 Live demo of the NodeJS example can be found at http://ng-upload.eu01.aws.af.cm
 
+## Installation via NuGet
+
+In addition to downloading [ng-upload](https://github.com/twilson63/ngUpload/zipball/master) directly, this directive can also be installed via [NuGet](http://www.nuget.org) under the package identity [__AngularJs.ngUpload__](https://nuget.org/packages/AngularJS.ngUpload/).  
+
+To install, enter:
+```
+install-package AngularJS.ngUpload
+```
+on the Package Manager Console of Visual Studio. Or you can search for the [__AngularJs.ngUpload__](https://nuget.org/packages/AngularJS.ngUpload/) package via the Manage NuGet packages context menu for your solution or project.
+
 ## License
 
 MIT
