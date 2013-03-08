@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf8" />
     <title>ngUpload - Examples</title>
-    <link href="libs/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css">
         body {
             font-family: Verdana;
@@ -91,40 +91,10 @@
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
         </div>
-        <div ng-controller="Example4Ctrl">
-            <h1>Example 4 - Processing Callback Function Contents</h1>
-            Make use of the additional callback status information to decide what to do with the content.
-            <br /><br />
-            <span style="font-size: 15px">Example 4.1: The example below displays all statuses, without inspection.</span>
-            <br /><br />
-            <form ng-upload="uploadFile1" action="/upload?delay=yes">
-                <p>
-                    <label>Select a file to upload:</label>
-                    <input type="file" name="file" />
-                </p>
-                <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
-                </p>
-            </form>
-            <div class="alert alert-info">Server Response: {{uploadResponse1}}</div>
-            <br />
-            <span style="font-size: 15px">Example 4.2: The example below displays only the server response, ignoring other contents</span>
-            <br /><br />
-            <form ng-upload="uploadFile2" action="/upload?delay=yes">
-                <p>
-                    <label>Select a file to upload:</label>
-                    <input type="file" name="file" />
-                </p>
-                <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
-                </p>
-            </form>
-            <div class="alert alert-info">Server Response: {{uploadResponse2}}</div>
-        </div>
     </div>
-    <script src="libs/js/jquery-1.9.1.min.js"></script>
-    <script src="libs/js/angular.min.js"></script>
-    <script src="libs/js/ng-upload.js"></script>
+    <script src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="/Scripts/angular.min.js"></script>
+    <script src="/Scripts/ng-upload.js"></script>
     <script type="text/javascript">
         // TODO add ng-upload module
         var app = angular.module('ngUploadApp', ['ngUpload']);
@@ -147,21 +117,6 @@
             $scope.uploadFile = function (content) {
                 console.log(content);
                 $scope.uploadResponse = content;
-            }
-        });
-
-        app.controller('Example4Ctrl', function ($scope) {
-            $scope.uploadFile1 = function (content, isComplete) {
-                console.log(content);
-                $scope.uploadResponse1 = content;
-            };
-
-            $scope.uploadFile2 = function (content, isComplete) {
-                console.log(content);
-                if (isComplete)
-                    $scope.uploadResponse2 = "[Status: Completed] " + content;
-                else
-                    $scope.uploadResponse2 = "[Status: Incomplete] Content ignored.  Check log the actual content.";
             }
         });
     </script>
