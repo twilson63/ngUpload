@@ -1,4 +1,4 @@
-// Version 0.2.0 
+// Version 0.2.0
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -40,10 +40,7 @@ angular.module('ngUpload', [])
 
                   element.attr("target", "upload_iframe");
                   element.attr("method", "post");
-
-                  // Append a timestamp field to the url to prevent browser caching results
                   element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
-
                   element.attr("enctype", "multipart/form-data");
                   element.attr("encoding", "multipart/form-data");
 
@@ -69,7 +66,7 @@ angular.module('ngUpload', [])
                               var content = iframe.contents().find('body').text();
 
                               // execute the upload response function in the active scope
-                              scope.$apply(function () { callbackFn(content, content !== "" /* upload completed */); });
+                              scope.$apply(function () { callbackFn(content, content != "" /* upload completed */); });
 
                               // remove iframe
                               if (content != "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.

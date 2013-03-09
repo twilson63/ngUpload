@@ -1,4 +1,4 @@
-// Version 0.1.1
+// Version 0.2.0 
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -34,18 +34,28 @@ angular.module('ngUpload', [])
               // }
               var options = {};
               options.enableControls = attrs['uploadOptionsEnableControls'];
-
+              
               // get scope function to execute on successful form upload
               if (attrs['ngUpload']) {
 
                   element.attr("target", "upload_iframe");
                   element.attr("method", "post");
+
+                  // Append a timestamp field to the url to prevent browser caching results
+                  element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
+
                   element.attr("enctype", "multipart/form-data");
                   element.attr("encoding", "multipart/form-data");
 
                   // Retrieve the callback function
                   var fn = attrs['ngUpload'].split('(')[0];
-                  var callbackFn = scope[fn];
+                  var callbackFn = scope.$eval(fn);
+                  if (callbackFn == null || callbackFn == undefined || !angular.isFunction(callbackFn))
+                  {
+                      var message = "The expression on the ngUpload directive does not point to a valid function.";
+                      // console.error(message);
+                      throw message + "\n";
+                  }                      
 
                   // Helper function to create new iframe for each form submission
                   var addNewDisposableIframe = function (submitControl) {
@@ -59,7 +69,7 @@ angular.module('ngUpload', [])
                               var content = iframe.contents().find('body').text();
 
                               // execute the upload response function in the active scope
-                              scope.$apply(function () { callbackFn(content); });
+                              scope.$apply(function () { callbackFn(content, content !== "" /* upload completed */); });
 
                               // remove iframe
                               if (content != "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
@@ -81,7 +91,7 @@ angular.module('ngUpload', [])
 
                           addNewDisposableIframe($(this) /* pass the submit control */);
 
-                          scope.$apply(function () { callbackFn("Please wait..."); });
+                          scope.$apply(function () { callbackFn("Please wait...", false /* upload not completed */); });
 
                           //console.log(angular.toJson(options));
 
