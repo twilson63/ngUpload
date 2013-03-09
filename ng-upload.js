@@ -33,10 +33,10 @@ angular.module('ngUpload', [])
               //    enableControls: bool 
               // }
               var options = {};
-              options.enableControls = attrs['uploadOptionsEnableControls'];
+              options.enableControls = attrs.uploadOptionsEnableControls;
               
               // get scope function to execute on successful form upload
-              if (attrs['ngUpload']) {
+              if (attrs.ngUpload) {
 
                   element.attr("target", "upload_iframe");
                   element.attr("method", "post");
@@ -48,9 +48,9 @@ angular.module('ngUpload', [])
                   element.attr("encoding", "multipart/form-data");
 
                   // Retrieve the callback function
-                  var fn = attrs['ngUpload'].split('(')[0];
+                  var fn = attrs.ngUpload.split('(')[0];
                   var callbackFn = scope.$eval(fn);
-                  if (callbackFn == null || callbackFn == undefined || !angular.isFunction(callbackFn))
+                  if (!angular.isFunction(callbackFn))
                   {
                       var message = "The expression on the ngUpload directive does not point to a valid function.";
                       // console.error(message);
@@ -72,7 +72,7 @@ angular.module('ngUpload', [])
                               scope.$apply(function () { callbackFn(content, content !== "" /* upload completed */); });
 
                               // remove iframe
-                              if (content != "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
+                              if (content !== "") // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
                                   setTimeout(function () { iframe.remove(); }, 250);
 
                               //if (options.enableControls == null || !(options.enableControls.length >= 0))

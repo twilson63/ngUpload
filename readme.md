@@ -3,7 +3,7 @@
 An AngularJS file upload directive.  
 
 
-## Update 0.1.1
+## Update 0.2.0
 
 * ngUpload is now an AngularJS Directive, removing the need to deal with the form[@id] attribute.
 * Addition of the __uploadOptionsEnableControls__ option to prevent the default disabling of submission controls during upload, like so:
