@@ -86,6 +86,7 @@ angular.module('ngUpload', [])
           // 2) attach a handler to the controls' click event
           var submitControl = element.find('.upload-submit');
           submitControl.bind('click', function () {
+            console.log('foo');
 
             addNewDisposableIframe(submitControl /* pass the submit control */);
 
