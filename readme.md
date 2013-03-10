@@ -2,6 +2,66 @@
 
 An AngularJS file upload directive.  
 
+## Update 0.2.0
+
+* Bug fixes and enahncements (#12 and #13)
+* Addition of an example to demonstrate using ngUpload to submit a full form, with a file input and other types of inputs, to the server.
+* Example also demonstate how to consume a JSON returned by the server in Angular. (Checkout example 5 on the demo page(s) - [ASP.Net MVC](http://ng-upload.azurewebsites.net) or [NodeJS](http://ng-upload.eu01.aws.af.cm/). 
+
+This source code of this example is given below:
+
+``` html
+   <form ng-upload="uploadComplete" action="/upload-full-form">
+       <p>
+           <label>Fullname:</label>
+           <input type="text" name="fullname" ng-model="fullname" />
+       </p>
+       <p>
+           <label>Gender:</label>
+           <input type="text" name="gender" ng-model="gender" />
+       </p>
+       <p>
+           <label>Favourite Color:</label>
+           <input type="text" name="color" ng-model="color"/>
+       </p>
+       <p>
+           <label>Your picture (file will not be saved on the server):</label>
+           <input type="file" name="file" />
+       </p>
+       <p>
+           <input type="submit" class="btn upload-submit" value="Submit" />
+       </p>
+   </form>
+   <div class="alert alert-info">Server Response: {{response | json}}</div>
+   <div>
+       Fullname: <b>{{response.fullname}}</b><br />
+       Gender: <b>{{response.gender}}</b><br />
+       Favourite Color: <span ng-style="response.style">{{response.color}}</span><br />
+       Picture: {{response.pictureUrl}}
+   </div>
+```
+... and the context ngController's source is:
+
+``` js
+   app.controller('Example5Ctrl', function ($scope) {
+      $scope.uploadComplete = function (content, isComplete) {
+          if (isComplete && content.length > 0)
+          {
+              $scope.response = JSON.parse(content); // Presumed content is a json string!
+              $scope.response.style = {
+                  color: $scope.response.color,
+                  "font-weight": "bold"
+              };
+              
+              // Clear form (reason for using the 'ng-model' directive on the input elements)
+              $scope.fullname = '';
+              $scope.gender = '';
+              $scope.color = '';
+              // Look for way to clear the input[type=file] element
+          }
+      };
+   });
+```
 
 ## Update 0.2.0
 
