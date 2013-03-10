@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive.  
 
-## Update 0.2.0
+## Update 0.2.1
 
 * Bug fixes and enahncements (#12 and #13)
 * Addition of an example to demonstrate using ngUpload to submit a full form, with a file input and other types of inputs, to the server.
@@ -11,7 +11,7 @@ An AngularJS file upload directive.
 This source code of this example is given below:
 
 ``` html
-   <form ng-upload="uploadComplete" action="/upload-full-form">
+   <form ng-upload="uploadComplete(contents, completed)" action="/upload-full-form">
        <p>
            <label>Fullname:</label>
            <input type="text" name="fullname" ng-model="fullname" />
@@ -44,8 +44,8 @@ This source code of this example is given below:
 
 ``` js
    app.controller('Example5Ctrl', function ($scope) {
-      $scope.uploadComplete = function (content, isComplete) {
-          if (isComplete && content.length > 0)
+      $scope.uploadComplete = function (content, completed) {
+          if (completed && content.length > 0)
           {
               $scope.response = JSON.parse(content); // Presumed content is a json string!
               $scope.response.style = {
@@ -68,7 +68,7 @@ This source code of this example is given below:
 * ngUpload is now an AngularJS Directive, removing the need to deal with the form[@id] attribute.
 * Addition of the __uploadOptionsEnableControls__ option to prevent the default disabling of submission controls during upload, like so:
 ``` html
-<form ng-upload='callbackFunction' uploadOptionsEnableControls>
+<form ng-upload='callbackFunction(contents, completed)' uploadOptionsEnableControls>
    ...
 </form>
 ``` 
@@ -93,7 +93,7 @@ Create a basic form with a file input element
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="results()"> 
+   <form action="/uploads" ng-upload="results(content, completed)"> 
      <input type="file" name="avatar"></input>
      <input type="submit" class="upload-submit" value="Upload"></input>
    </form>
@@ -104,7 +104,6 @@ Create a basic form with a file input element
 ### Some rule of thumb
 
 * Any html element that supports the click event can be used to submit the form marked with the __ng-upload__ directive, as long as such elements are marked with the 'upload-submit' class.
-* The __()__ suffix on the __ng-upload__ directive callback function is optional.
 * Make sure you import the __'ngUpload'__ module in your angularJS application.
 
 Applying this rules, the sample above can be re-written as
@@ -112,7 +111,7 @@ Applying this rules, the sample above can be re-written as
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="results"> 
+   <form action="/uploads" ng-upload="results(contents, completed)"> 
      <input type="file" name="avatar"></input>
      <div class='upload-submit' style='cursor: pointer'>Upload with Div</div> &bull;
      <a class='upload-submit' href='javascript:void(0)'>Upload with Anchor</a>
@@ -127,8 +126,8 @@ The AngularJS controller for the above samples is given as:
 ``` js
 angular.module('app', ['ngUpload'])
   .controller('mainCtrl', function($scope) {
-    $scope.results = function(content, isCompleted) {
-      if (isCompleted && content.length > 0)
+    $scope.results = function(content, completed) {
+      if (completed && content.length > 0)
         console.log(content); // process content
       else
       {
