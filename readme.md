@@ -61,6 +61,7 @@ app.controller('Example5Ctrl', function ($scope) {
 
 * AngularJS (http://angularjs.org)
 * JQuery (http://jquery.org)
+
 ## Usage
 
 Add to your html file
@@ -85,7 +86,7 @@ Create a basic form with a file input element
 
 ### Some rule of thumb
 
-* Any html element that supports the click event can be used to submit the form marked with the __ng-upload__ directive, as long as such elements are marked with the 'upload-submit' directive.
+* Any html element that supports the click event can be used to submit the form marked with the __ng-upload__ directive, as long as such elements are marked with the __'upload-submit'__ directive.
 * Make sure you import the __'ngUpload'__ module in your angularJS application.
 
 Applying this rules, the sample above can be re-written as
@@ -95,8 +96,7 @@ Applying this rules, the sample above can be re-written as
   <div ng-controller="mainCtrl">
    <form action="/uploads" ng-upload> 
      <input type="file" name="avatar"></input>
-     <div style='cursor: pointer' upload-submit="results(contents, completed)">Upload with Div</div> &bull;
-     <a class='upload-submit' href='javascript:void(0)'>Upload with Anchor</a>
+     <div style='cursor: pointer' upload-submit="results(content, completed)">Upload with Div</div> &bull;
    </form>
  </div>
 </div>
@@ -109,7 +109,9 @@ or
   <div ng-controller="mainCtrl">
    <form action="/uploads" ng-upload> 
      <input type="file" name="avatar"></input>
-     <a href='javascript:void(0)' upload-submit="results(contents, completed)">Upload with Anchor</a>
+     <a href='javascript:void(0)' 
+       class="upload-submit: results(contents, completed)" >
+         Upload with Anchor</a>
    </form>
  </div>
 </div>
