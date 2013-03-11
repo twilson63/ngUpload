@@ -1,4 +1,4 @@
-// ngUpload as directive and input submit
+// ngUpload as class and button
 describe('ngUpload', function() {
   var elm, scope;
   beforeEach(module('ngUpload'));
@@ -7,7 +7,7 @@ describe('ngUpload', function() {
       '<div>' +
         '<form action="/upload" ng-upload>' +
           '<input type="file" name="foo"></input>' +
-          '<input type="submit" value="submit" upload-submit="foo()"></input>' +
+          '<a href="javascript: void(0);" class="baz" upload-submit="bar()">Upload</a>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
@@ -25,8 +25,7 @@ describe('ngUpload', function() {
 
   });
   it('should set submit control', function() {
-    var submit = elm.find('input[type="submit"]');
-    expect(submit.attr('upload-submit')).toBeDefined();
+    var submit = elm.find('a.baz');
     submit.click();
     var iframe = elm.find('#upload_iframe');
     expect(iframe).toBeDefined();

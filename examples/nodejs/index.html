@@ -27,13 +27,13 @@
             <span>Current value of foo is: <b>{{foo}}</b>. <i>(Works with the active $scope.)</i></span>
             <br />
             <br />
-            <form ng-upload="bar(content)" method="POST" action="/upload?delay=yes">
+            <form ng-upload method="POST" action="/upload?delay=yes">
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input upload-submit="bar(content)" type="submit" class="btn" value="Submit" />
                     <br />
                     <i>Button is <b>disabled</b> during upload, by default. (See Example 2 to change this).</i>
                 </p>
