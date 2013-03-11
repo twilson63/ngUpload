@@ -34,15 +34,9 @@
 
 <p>An AngularJS file upload directive.  </p>
 
-<h2>Update 0.2.0</h2>
+<h2>0.3.0 - for updates see CHANGELOG.md</h2>
 
-<ul>
-<li>Bug fixes and enahncements (#12 and #13)</li>
-<li>Addition of an example to demonstrate using ngUpload to submit a full form, with a file input and other types of inputs, to the server.</li>
-<li>Example also demonstate how to consume a JSON returned by the server in Angular. (Checkout example 5 on the demo page(s) - <a href="http://ng-upload.azurewebsites.net">ASP.Net MVC</a> or <a href="http://ng-upload.eu01.aws.af.cm/">NodeJS</a>. </li>
-</ul><p>This source code of this example is given below:</p>
-
-<div class="highlight"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload=</span><span class="s">"uploadComplete"</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
+<div class="highlight"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;p&gt;</span>
            <span class="nt">&lt;label&gt;</span>Fullname:<span class="nt">&lt;/label&gt;</span>
            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"fullname"</span> <span class="na">ng-model=</span><span class="s">"fullname"</span> <span class="nt">/&gt;</span>
@@ -60,7 +54,8 @@
            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;/p&gt;</span>
        <span class="nt">&lt;p&gt;</span>
-           <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn upload-submit"</span> <span class="na">value=</span><span class="s">"Submit"</span> <span class="nt">/&gt;</span>
+           <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"Submit"</span> 
+             <span class="na">upload-submit=</span><span class="s">"uploadComplete(contents, completed)"</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;/p&gt;</span>
    <span class="nt">&lt;/form&gt;</span>
    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-info"</span><span class="nt">&gt;</span>Server Response: {{response | json}}<span class="nt">&lt;/div&gt;</span>
@@ -74,43 +69,30 @@
 
 <p>... and the context ngController's source is:</p>
 
-<div class="highlight"><pre>   <span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'Example5Ctrl'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">$scope</span><span class="p">.</span><span class="nx">uploadComplete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">isComplete</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">if</span> <span class="p">(</span><span class="nx">isComplete</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-          <span class="p">{</span>
-              <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span> <span class="c1">// Presumed content is a json string!</span>
-              <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
-                  <span class="nx">color</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">color</span><span class="p">,</span>
-                  <span class="s2">"font-weight"</span><span class="o">:</span> <span class="s2">"bold"</span>
-              <span class="p">};</span>
-
-              <span class="c1">// Clear form (reason for using the 'ng-model' directive on the input elements)</span>
-              <span class="nx">$scope</span><span class="p">.</span><span class="nx">fullname</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-              <span class="nx">$scope</span><span class="p">.</span><span class="nx">gender</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-              <span class="nx">$scope</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-              <span class="c1">// Look for way to clear the input[type=file] element</span>
-          <span class="p">}</span>
+<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'Example5Ctrl'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$scope</span><span class="p">.</span><span class="nx">uploadComplete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">completed</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span> <span class="c1">// Presumed content is a json string!</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">color</span><span class="p">,</span>
+        <span class="s2">"font-weight"</span><span class="o">:</span> <span class="s2">"bold"</span>
       <span class="p">};</span>
-   <span class="p">});</span>
+
+      <span class="c1">// Clear form (reason for using the 'ng-model' directive on the input elements)</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">fullname</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">gender</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="nx">$scope</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+      <span class="c1">// Look for way to clear the input[type=file] element</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">});</span>
 </pre></div>
 
-<h2>Update 0.2.0</h2>
+<h2>Requirements</h2>
 
 <ul>
-<li>ngUpload is now an AngularJS Directive, removing the need to deal with the form[<a href="https://github.com/id" class="user-mention">@id</a>] attribute.</li>
-<li>Addition of the <strong>uploadOptionsEnableControls</strong> option to prevent the default disabling of submission controls during upload, like so:
-<code>html
-&lt;form ng-upload='callbackFunction' uploadOptionsEnableControls&gt;
-...
-&lt;/form&gt;
-</code> 
-<em>Submission controls are html elements marked with the <strong>upload-submit</strong> css class</em>.</li>
-<li>Some bug fixes.</li>
-</ul><h2>Requirements</h2>
-
-<ul>
-<li>AngularJS</li>
-<li>JQuery</li>
+<li>AngularJS (<a href="http://angularjs.org">http://angularjs.org</a>)</li>
+<li>JQuery (<a href="http://jquery.org">http://jquery.org</a>)</li>
 </ul><h2>Usage</h2>
 
 <p>Add to your html file</p>
@@ -122,9 +104,10 @@
 
 <div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload=</span><span class="s">"results()"</span><span class="nt">&gt;</span> 
+   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
-     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"upload-submit"</span> <span class="na">value=</span><span class="s">"Upload"</span><span class="nt">&gt;&lt;/input&gt;</span>
+     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Upload"</span> 
+       <span class="na">upload-submit=</span><span class="s">"results(content, completed)"</span><span class="nt">&gt;&lt;/input&gt;</span>
    <span class="nt">&lt;/form&gt;</span>
  <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
@@ -133,17 +116,29 @@
 <h3>Some rule of thumb</h3>
 
 <ul>
-<li>Any html element that supports the click event can be used to submit the form marked with the <strong>ng-upload</strong> directive, as long as such elements are marked with the 'upload-submit' class.</li>
-<li>The <strong>()</strong> suffix on the <strong>ng-upload</strong> directive callback function is optional.</li>
+<li>Any html element that supports the click event can be used to submit the form marked with the <strong>ng-upload</strong> directive, as long as such elements are marked with the <strong>'upload-submit'</strong> directive.</li>
 <li>Make sure you import the <strong>'ngUpload'</strong> module in your angularJS application.</li>
 </ul><p>Applying this rules, the sample above can be re-written as</p>
 
 <div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload=</span><span class="s">"results"</span><span class="nt">&gt;</span> 
+   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
-     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'upload-submit'</span> <span class="na">style=</span><span class="s">'cursor: pointer'</span><span class="nt">&gt;</span>Upload with Div<span class="nt">&lt;/div&gt;</span> <span class="ni">&amp;bull;</span>
-     <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">'upload-submit'</span> <span class="na">href=</span><span class="s">'javascript:void(0)'</span><span class="nt">&gt;</span>Upload with Anchor<span class="nt">&lt;/a&gt;</span>
+     <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">'cursor: pointer'</span> <span class="na">upload-submit=</span><span class="s">"results(content, completed)"</span><span class="nt">&gt;</span>Upload with Div<span class="nt">&lt;/div&gt;</span> <span class="ni">&amp;bull;</span>
+   <span class="nt">&lt;/form&gt;</span>
+ <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
+     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
+     <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">'javascript:void(0)'</span> 
+       <span class="na">class=</span><span class="s">"upload-submit: results(contents, completed)"</span> <span class="nt">&gt;</span>
+         Upload with Anchor<span class="nt">&lt;/a&gt;</span>
    <span class="nt">&lt;/form&gt;</span>
  <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
@@ -155,8 +150,8 @@
 
 <div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'ngUpload'</span><span class="p">])</span>
   <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'mainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">isCompleted</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">isCompleted</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">completed</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span> <span class="c1">// process content</span>
       <span class="k">else</span>
       <span class="p">{</span>
@@ -177,7 +172,9 @@
 
 <h2>Installation via NuGet</h2>
 
-<p>In addition to downloading <a href="https://github.com/twilson63/ngUpload/zipball/master">ng-upload</a> directly, this directive can also be installed via <a href="http://www.nuget.org">NuGet</a> under the package identity <a href="https://nuget.org/packages/AngularJS.ngUpload/"><strong>AngularJs.ngUpload</strong></a>.  </p>
+<p>In addition to downloading <a href="https://github.com/twilson63/ngUpload/zipball/master">ng-upload</a> directly, this directive can also be installed via </p>
+
+<p><a href="http://www.nuget.org">NuGet</a> under the package identity <a href="https://nuget.org/packages/AngularJS.ngUpload/"><strong>AngularJs.ngUpload</strong></a>.  </p>
 
 <p>To install, enter:</p>
 
@@ -185,6 +182,32 @@
 </code></pre>
 
 <p>on the Package Manager Console of Visual Studio. Or you can search for the <a href="https://nuget.org/packages/AngularJS.ngUpload/"><strong>AngularJs.ngUpload</strong></a> package via the Manage NuGet packages context menu for your solution or project.</p>
+
+<h2>Test</h2>
+
+<p>Needs Chrome Installed.</p>
+
+<div class="highlight"><pre>npm install
+npm install testacular -g
+
+testacular start
+</pre></div>
+
+<h2>jshint</h2>
+
+<div class="highlight"><pre>npm install
+npm install grunt-cli -g
+
+grunt jshint
+</pre></div>
+
+<h2>Minify</h2>
+
+<div class="highlight"><pre>npm install
+npm install grunt-cli -g
+
+grunt uglify
+</pre></div>
 
 <h2>License</h2>
 
