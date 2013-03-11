@@ -7,7 +7,9 @@ describe('ngUpload', function() {
       '<div>' +
         '<form action="/upload" ng-upload>' +
           '<input type="file" name="foo"></input>' +
+          '<p>' +
           '<div class="baz" upload-submit="bar()">Upload</div>' +
+          '</p>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
