@@ -1,3 +1,7 @@
+# 0.3.1
+
+* Changed form detection to use .parents method instead of passing by scope
+
 # 0.3.0
 
 * Refactored API

@@ -125,7 +125,7 @@
             <h1>Example 5 - Processing a full form (requirement: v0.2.0)</h1>
             Post a full form with a file and other inputs (text, etc) to the server and get a JSON result.
             <br /><br />
-            <form ng-upload="uploadComplete(content, completed)" action="/upload-full-form">
+            <form action="/upload-full-form" ng-upload>
                 <p>
                     <label>Fullname:</label>
                     <input type="text" name="fullname" ng-model="fullname" />
@@ -143,7 +143,7 @@
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input type="submit" class="btn" value="Submit" upload-submit="uploadComplete(content, completed)" />
                 </p>
             </form>
             <div class="alert alert-info">Server Response: {{response | json}}</div>

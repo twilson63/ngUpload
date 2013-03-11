@@ -1,4 +1,4 @@
-// Version 0.3.0 
+// Version 0.3.1
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -36,14 +36,17 @@ angular.module('ngUpload', [])
         // }
         var options = {};
         options.enableControls = attrs.uploadOptionsEnableControls;
-        
+
+        // submit the form - requires jQuery
+        var form = element.parents('form[ng-upload]') || element.parents('form.ng-upload'); 
+
         // Retrieve the callback function
         var fn = $parse(attrs.uploadSubmit);
 
         if (!angular.isFunction(fn)) {
             var message = "The expression on the ngUpload directive does not point to a valid function.";
             throw message + "\n";
-        };
+        }
 
         element.bind('click', function() {
           // create a new iframe
@@ -55,24 +58,22 @@ angular.module('ngUpload', [])
             var content = iframe.contents().find('body').text();
             // execute the upload response function in the active scope
             scope.$apply(function () { 
-              fn(scope, { content: content, completed: content !== ""});
+              fn(scope, { content: content, completed: true});
             });
             // remove iframe
             if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
                 setTimeout(function () { iframe.remove(); }, 250);
             }
-            //if (options.enableControls == null || !(options.enableControls.length >= 0))
             element.attr('disabled', null);
             element.attr('title', 'Click to start upload.');
           });
 
           // add the new iframe to application
-          //element.parents('form').parent().append(iframe);
-          scope.uploadForm.parent().append(iframe);
-          
+          form.parent().append(iframe);
+
           scope.$apply(function () { 
-            fn(scope, {content: "Please wait...", completed: false 
-          } /* upload not completed */); });
+            fn(scope, {content: "Please wait...", completed: false }); 
+          });
 
           var enabled = true;
           if (!options.enableControls) {
@@ -80,15 +81,14 @@ angular.module('ngUpload', [])
               element.attr('disabled', 'disabled');
               enabled = false;
           }
-
+          // why do we need this???
           element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
 
-          // submit the form
-          scope.uploadForm.submit();
+          form.submit();
 
         }).attr('title', 'Click to start upload.');
       }
-    }
+    };
   }])
   .directive('ngUpload', ['$parse', function ($parse) {
     return {
@@ -100,7 +100,6 @@ angular.module('ngUpload', [])
         element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
         element.attr("enctype", "multipart/form-data");
         element.attr("encoding", "multipart/form-data");
-        scope.uploadForm = element;
       }
-    }
+    };
   }]);

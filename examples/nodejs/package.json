@@ -1,5 +1,5 @@
 {
-  "name": "ng-upload",
+  "name": "ng-upload-example",
   "version": "0.0.0",
   "description": "ERROR: No README.md file found!",
   "main": "app.js",
@@ -11,5 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "~3.1.0"
-  }
+  },
+  "devDependencies": {}
 }

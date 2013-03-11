@@ -1,4 +1,4 @@
-// Version 0.3.0 
+// Version 0.3.1
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -37,6 +37,9 @@ angular.module('ngUpload', [])
         var options = {};
         options.enableControls = attrs.uploadOptionsEnableControls;
 
+        // submit the form - requires jQuery
+        var form = element.parents('form[ng-upload]') || element.parents('form.ng-upload'); 
+
         // Retrieve the callback function
         var fn = $parse(attrs.uploadSubmit);
 
@@ -66,7 +69,7 @@ angular.module('ngUpload', [])
           });
 
           // add the new iframe to application
-          scope.uploadForm.parent().append(iframe);
+          form.parent().append(iframe);
 
           scope.$apply(function () { 
             fn(scope, {content: "Please wait...", completed: false }); 
@@ -81,8 +84,7 @@ angular.module('ngUpload', [])
           // why do we need this???
           element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
 
-          // submit the form - requires jQuery
-          scope.uploadForm.submit();
+          form.submit();
 
         }).attr('title', 'Click to start upload.');
       }
@@ -98,7 +100,6 @@ angular.module('ngUpload', [])
         element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
         element.attr("enctype", "multipart/form-data");
         element.attr("encoding", "multipart/form-data");
-        scope.uploadForm = element;
       }
     };
   }]);
