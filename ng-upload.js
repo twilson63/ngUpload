@@ -36,7 +36,7 @@ angular.module('ngUpload', [])
         // }
         var options = {};
         options.enableControls = attrs.uploadOptionsEnableControls;
-        
+
         // Retrieve the callback function
         var fn = $parse(attrs.uploadSubmit);
 
@@ -67,7 +67,7 @@ angular.module('ngUpload', [])
 
           // add the new iframe to application
           scope.uploadForm.parent().append(iframe);
-          
+
           scope.$apply(function () { 
             fn(scope, {content: "Please wait...", completed: false }); 
           });

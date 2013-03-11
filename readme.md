@@ -194,6 +194,10 @@ MIT
 
 pull requests welcome.
 
+please use the following style guidelines
+
+(http://nodeguide.com/style.html)
+
 ## Contributors
 
 * ADEBISI Foluso A. (https://github.com/adebisi-fa)
