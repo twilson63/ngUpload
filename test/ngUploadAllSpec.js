@@ -42,6 +42,73 @@ describe('ngUpload', function () {
         expect(form.attr('method')).toBe('post');
     });
 
+    describe(' - Compilation: ', function () {
+        var input, inputB, compile;
+
+        beforeEach(inject(function ($rootScope, $compile, $controller) {
+            compile = $compile;
+            scope = $rootScope.$new();
+            $controller(TestController, { $scope: scope });
+        }));
+
+        it('Should throw an exception, when callback function is not set', function () {
+            var shouldThrow = function () {
+                compile(
+                    angular.element(
+                        '<div>' + 
+                            '<form action="/upload" ng-upload>' +
+                                '<input type="file" name="foo"></input>' +
+                                '<p>' +
+                                    '<input type="submit" upload-submit value="Upload" />' +
+                                '</p>' +
+                            '</form>' +
+                            '<span class="result">{{result}}</span>' +
+                        '</div>'
+                    )
+                )(scope);
+            }
+            expect(shouldThrow).toThrow();
+        });
+
+        it('Should throw an exception, when callback function is not valid on scope', function () {
+            var shouldThrow = function () {
+                compile(
+                    angular.element(
+                        '<div>' +
+                            '<form action="/upload" ng-upload>' +
+                                '<input type="file" name="foo"></input>' +
+                                '<p>' +
+                                    '<input type="submit" upload-submit="nonExistingFunction()" value="Upload" />' +
+                                '</p>' +
+                            '</form>' +
+                            '<span class="result">{{result}}</span>' +
+                        '</div>'
+                    )
+                )(scope);
+            }
+            expect(shouldThrow).toThrow();
+        });
+
+        it('Shouldn\'t throw an exception when callback function is set and valid on scope', function () {
+            var shouldNotThrow = function () {
+                compile(
+                    angular.element(
+                        '<div>' +
+                            '<form action="/upload" ng-upload>' +
+                                '<input type="file" name="foo"></input>' +
+                                '<p>' +
+                                    '<input type="submit" upload-submit="bar2()" value="Upload" />' +
+                                '</p>' +
+                            '</form>' +
+                            '<span class="result">{{result}}</span>' +
+                        '</div>'
+                    )
+                )(scope);
+            }
+            expect(shouldNotThrow).not.toThrow();
+        });
+    });
+
     // ngSubmit tests using html 'div'
     describe('- Using Div: ', function () {
 

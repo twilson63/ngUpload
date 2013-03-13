@@ -40,12 +40,16 @@ angular.module('ngUpload', [])
               // submit the form - requires jQuery
               var form = element.parents('form[ng-upload]') || element.parents('form.ng-upload');
 
+              if (!attrs.uploadSubmit) {
+                  throw "A valid callback function must be supplied."
+              }
+
               // Retrieve the callback function
               var fnExpr = attrs.uploadSubmit.split('(')[0];
               var fn = scope.$eval(fnExpr); //$parse(attrs.uploadSubmit);
 
               if (!angular.isFunction(fn)) {
-                  var message = "The expression on the ngUpload directive does not point to a valid function.";
+                  var message = "The expression on the ngSubmit directive does not point to a valid function.";
                   throw message + "\n";
               }
 
