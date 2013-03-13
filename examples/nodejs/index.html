@@ -53,13 +53,13 @@
             </span>
             <br />
             <br />
-            <form ng-upload="uploadFile(content)" action="/upload?delay=yes" upload-options-enable-controls>
+            <form ng-upload action="/upload?delay=yes" upload-options-enable-controls>
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input type="submit" class="btn" upload-submit='uploadFile(content)' value="Submit" />
                 </p>
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
