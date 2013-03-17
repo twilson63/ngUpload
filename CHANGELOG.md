@@ -1,3 +1,7 @@
+# 0.3.2
+
+* added preventDefault to click event
+
 # 0.3.1
 
 * Changed form detection to use .parents method instead of passing by scope

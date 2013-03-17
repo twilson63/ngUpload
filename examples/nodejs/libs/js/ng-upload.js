@@ -1,4 +1,4 @@
-// Version 0.3.1
+// Version 0.3.2
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -49,6 +49,8 @@ angular.module('ngUpload', [])
         }
 
         element.bind('click', function() {
+          // prevent default behavior of click
+          $event.preventDefault = true;
           // create a new iframe
           var iframe = angular.element("<iframe id='upload_iframe' name='upload_iframe' border='0' width='0' height='0' style='width: 0px; height: 0px; border: none; display: none' />");
 
