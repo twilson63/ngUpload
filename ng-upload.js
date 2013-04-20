@@ -38,7 +38,7 @@ angular.module('ngUpload', [])
         options.enableControls = attrs.uploadOptionsEnableControls;
 
         // submit the form - requires jQuery
-        var form = element.parents('form[ng-upload]') || element.parents('form.ng-upload'); 
+        var form = element.parent('form[ng-upload]') || element.parent('form.ng-upload'); 
 
         // Retrieve the callback function
         var fn = $parse(attrs.uploadSubmit);
