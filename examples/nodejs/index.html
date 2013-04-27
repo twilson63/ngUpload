@@ -53,13 +53,13 @@
             </span>
             <br />
             <br />
-            <form ng-upload="uploadFile(content)" action="/upload?delay=yes" upload-options-enable-controls>
+            <form ng-upload action="/upload?delay=yes" upload-options-enable-controls>
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input type="submit" class="btn" value="Submit" upload-submit="uploadFile(content, completed)" />
                 </p>
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
@@ -68,7 +68,7 @@
             <h1>Example 3 - Submitting forms with any html element (requirement: v0.1.1 and above)</h1>
             <span>This examples show how to use any html element to submit your form.  It makes use of a 'div', an 'a', and an 'img' tags to submit the same form.</span>
             <br />
-            <form ng-upload="uploadFile(content, completed)" action="/upload?delay=yes">
+            <form ng-upload action="/upload?delay=yes">
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
@@ -76,15 +76,15 @@
                 <div style="width:550px">
                     <div class="row-fluid">
                         <div class="span4">
-                            <div class="upload-submit" style="text-align: center; cursor: pointer; padding: 10px; background-color: black; color: white;">
+                            <div style="text-align: center; cursor: pointer; padding: 10px; background-color: black; color: white;" upload-submit="uploadFile(content, completed)">
                                 With a div
                             </div>
                         </div>
                         <div class="span4">
-                            <a class="upload-submit" href="javascript:void(0)" style="padding: 10px; display: block;">With a link.</a>
+                            <a ng-href="javascript:void(0)" style="padding: 10px; display: block;" upload-submit="uploadFile(content, completed)">With a link.</a>
                         </div>
                         <div class="span4">
-                            <button class="btn btn-small btn-primary upload-submit"><i class="icon-arrow-up icon-white"></i>&nbsp;With an image button.</button>
+                            <button class="btn btn-small btn-primary" upload-submit="uploadFile(content, completed)"><i class="icon-arrow-up icon-white"></i>&nbsp;With an image button.</button>
                         </div>
                     </div>
                 </div>
@@ -97,26 +97,26 @@
             <br /><br />
             <span style="font-size: 15px">Example 4.1: The example below displays all statuses, without inspection.</span>
             <br /><br />
-            <form ng-upload="uploadFile1(content, completed)" action="/upload?delay=yes">
+            <form ng-upload action="/upload?delay=yes">
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input type="submit" class="btn" upload-submit="uploadFile1(content, completed)" value="Submit" />
                 </p>
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse1}}</div>
             <br />
             <span style="font-size: 15px">Example 4.2: The example below displays only the server response, ignoring other contents</span>
             <br /><br />
-            <form ng-upload="uploadFile2(content, completed)" action="/upload?delay=yes">
+            <form ng-upload action="/upload?delay=yes">
                 <p>
                     <label>Select a file to upload:</label>
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input type="submit" class="btn upload-submit" value="Submit" />
+                    <input type="submit" class="btn" upload-submit="uploadFile2(content, completed)" value="Submit" />
                 </p>
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse2}}</div>
