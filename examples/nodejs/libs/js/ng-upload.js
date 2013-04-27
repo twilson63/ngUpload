@@ -24,7 +24,7 @@
 //  });
 //
 angular.module('ngUpload', [])
-  .directive('uploadSubmit', ['$parse', function($parse) {
+  .directive('uploadSubmit', ['$parse', '$window', '$http', function($parse, $window, $http) {
     return {
       restrict: 'AC',
       link: function(scope, element, attrs) {
@@ -47,10 +47,14 @@ angular.module('ngUpload', [])
             var message = "The expression on the ngUpload directive does not point to a valid function.";
             throw message + "\n";
         }
-
-        element.bind('click', function() {
+        // form.bind('submit', function() {
+        //   return false;
+        // });
+        
+        element.bind('click', function($event) {
           // prevent default behavior of click
-          $event.preventDefault = true;
+          //$event.preventDefault = true;
+
           // create a new iframe
           var iframe = angular.element("<iframe id='upload_iframe' name='upload_iframe' border='0' width='0' height='0' style='width: 0px; height: 0px; border: none; display: none' />");
 
@@ -87,14 +91,14 @@ angular.module('ngUpload', [])
           element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
 
           form.submit();
-
+          //return false;
         }).attr('title', 'Click to start upload.');
       }
     };
   }])
   .directive('ngUpload', ['$parse', function ($parse) {
     return {
-      restrict: 'AC',
+      restrict: 'ACE',
       link: function (scope, element, attrs) {
         element.attr("target", "upload_iframe");
         element.attr("method", "post");

@@ -1,0 +1,10 @@
+{
+  "name": "ngUpload",
+  "version": "0.3.3",
+  "main": "ng-upload.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}

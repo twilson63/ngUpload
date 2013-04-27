@@ -1,3 +1,7 @@
+# 0.3.3
+
+* added conditional to click event preventDefault
+
 # 0.3.2
 
 * added preventDefault to click event
