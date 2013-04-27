@@ -1,4 +1,4 @@
-// Version 0.3.2
+// Version 0.3.4
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -38,7 +38,7 @@ angular.module('ngUpload', [])
         options.enableControls = attrs.uploadOptionsEnableControls;
 
         // submit the form - requires jQuery
-        var form = angular.element(element.parents('form[ng-upload]')) || angular.element(element.parents('form.ng-upload')); 
+        var form = angular.element(element).parents('form'); 
 
         // Retrieve the callback function
         var fn = $parse(attrs.uploadSubmit);

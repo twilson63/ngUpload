@@ -201,6 +201,7 @@ please use the following style guidelines
 ## Contributors
 
 * ADEBISI Foluso A. (https://github.com/adebisi-fa)
+* Hassan Alqaraguli (https://github.com/HassanAlqaraguli)
 
 ## Thanks
 
