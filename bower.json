@@ -8,6 +8,7 @@
     "components"
   ],
   "dependencies": {
-    "jquery": "~1.9.1"
+    "jquery": "~1.9.1",
+    "angular": "~1.0.4"
   }
 }
