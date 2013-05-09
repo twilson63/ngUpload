@@ -59,7 +59,7 @@ angular.module('ngUpload', [])
           // attach function to load event of the iframe
           iframe.bind('load', function () {
             // get content - requires jQuery
-            var content = iframe.contents().find('body').text();
+            var content = iframe.contents().find('body').html();
             // execute the upload response function in the active scope
             scope.$apply(function () { 
               fn(scope, { content: content, completed: true});
