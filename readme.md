@@ -138,23 +138,13 @@ angular.module('app', ['ngUpload'])
 
 ## Example
 
-Example of forms that posts to ASP.Net MVC or NodeJS server are now included under the [/examples](https://github.com/twilson63/ngUpload/tree/master/examples) folder.
+Example of forms that posts to NodeJS server are now included under the [/examples](https://github.com/twilson63/ngUpload/tree/master/examples) folder.
 
-Live demo of the ASP.Net MVC example can be found at http://ng-upload.azurewebsites.net  
+## Install via Bower
 
-Live demo of the NodeJS example can be found at http://ng-upload.eu01.aws.af.cm
-
-## Installation via NuGet
-
-In addition to downloading [ng-upload](https://github.com/twilson63/ngUpload/zipball/master) directly, this directive can also be installed via 
-
-[NuGet](http://www.nuget.org) under the package identity [__AngularJs.ngUpload__](https://nuget.org/packages/AngularJS.ngUpload/).  
-
-To install, enter:
+``` sh
+bower install ngUpload
 ```
-install-package AngularJS.ngUpload
-```
-on the Package Manager Console of Visual Studio. Or you can search for the [__AngularJs.ngUpload__](https://nuget.org/packages/AngularJS.ngUpload/) package via the Manage NuGet packages context menu for your solution or project.
 
 ## Test
 
