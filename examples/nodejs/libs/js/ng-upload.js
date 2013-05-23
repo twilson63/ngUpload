@@ -1,4 +1,4 @@
-// Version 0.3.3
+// Version 0.3.5
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -49,7 +49,6 @@ angular.module('ngUpload', [])
         }
 
         element.bind('click', function($event) {
-
           // prevent default behavior of click
           if ($event) {
             $event.preventDefault = true;
@@ -60,7 +59,7 @@ angular.module('ngUpload', [])
           // attach function to load event of the iframe
           iframe.bind('load', function () {
             // get content - requires jQuery
-            var content = iframe.contents().find('body').text();
+            var content = iframe.contents().find('body').html();
             // execute the upload response function in the active scope
             scope.$apply(function () { 
               fn(scope, { content: content, completed: true});
@@ -102,7 +101,8 @@ angular.module('ngUpload', [])
         element.attr("target", "upload_iframe");
         element.attr("method", "post");
         // Append a timestamp field to the url to prevent browser caching results
-        element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
+        var separator = element.attr("action").indexOf('?')==-1 ? '?' : '&';
+        element.attr("action", element.attr("action") + separator + "_t=" + new Date().getTime());
         element.attr("enctype", "multipart/form-data");
         element.attr("encoding", "multipart/form-data");
       }

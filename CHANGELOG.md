@@ -1,3 +1,8 @@
+# 0.3.5
+
+* #35 fix(iframe - get content): Get html, not text
+* #39 Bugfix: check url already have get params
+
 # 0.3.3
 
 * added conditional to click event preventDefault
