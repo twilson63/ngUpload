@@ -101,7 +101,8 @@ angular.module('ngUpload', [])
         element.attr("target", "upload_iframe");
         element.attr("method", "post");
         // Append a timestamp field to the url to prevent browser caching results
-        element.attr("action", element.attr("action") + "?_t=" + new Date().getTime());
+        var separator = element.attr("action").indexOf('?')==-1 ? '?' : '&';
+        element.attr("action", element.attr("action") + separator + "_t=" + new Date().getTime());
         element.attr("enctype", "multipart/form-data");
         element.attr("encoding", "multipart/form-data");
       }
