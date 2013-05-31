@@ -1,3 +1,8 @@
+# 0.3.6
+
+* #41 Prevent file from uploading if the submit element is disabled
+
+
 # 0.3.5
 
 * #35 fix(iframe - get content): Get html, not text
