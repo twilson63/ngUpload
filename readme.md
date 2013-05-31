@@ -195,6 +195,7 @@ please use the following style guidelines
 * Jørgen Borgesen (https://github.com/jorgenfb)
 * cristianocd (https://github.com/cristianocd)
 * Evgeniy Zatsepin (https://github.com/dizzy7)
+* Chris Tesene (https://github.com/ctesene)
 
 ## Thanks
 
