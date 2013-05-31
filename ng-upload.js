@@ -53,6 +53,11 @@ angular.module('ngUpload', [])
           if ($event) {
             $event.preventDefault = true;
           }
+
+          if (element.attr('disabled')) {
+            return;
+          }
+
           // create a new iframe
           var iframe = angular.element("<iframe id='upload_iframe' name='upload_iframe' border='0' width='0' height='0' style='width: 0px; height: 0px; border: none; display: none' />");
 
