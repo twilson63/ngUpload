@@ -29,8 +29,17 @@ describe('ngUpload', function() {
     expect(submit.attr('upload-submit')).toBeDefined();
     submit.click();
     var iframe = elm.find('#upload_iframe');
-    expect(iframe).toBeDefined();
+    expect(iframe[0]).toBeDefined();    
     expect(submit.attr('disabled')).toBe('disabled');
-    expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...');
+    expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...' );
   });
+  it('should not upload if the element is disabled', function() {
+    var submit = elm.find('input[type="submit"]');
+    submit.attr('disabled','disabled');      
+    expect(submit.attr('disabled')).toBeDefined();
+    submit.click();
+    var iframe = elm.find('#upload_iframe');    
+    expect(iframe.length).toEqual(0);
+  });
+
 })
