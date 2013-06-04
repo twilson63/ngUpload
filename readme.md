@@ -62,7 +62,7 @@ app.controller('Example5Ctrl', function ($scope) {
 * AngularJS (http://angularjs.org)
 * JQuery (http://jquery.org)
 
-## Install with bower
+## Install with Bower
 
 ```
 bower install ngUpload 
@@ -145,12 +145,6 @@ angular.module('app', ['ngUpload'])
 ## Example
 
 Example of forms that posts to NodeJS server are now included under the [/examples](https://github.com/twilson63/ngUpload/tree/master/examples) folder.
-
-## Install via Bower
-
-``` sh
-bower install ngUpload
-```
 
 ## Test
 
