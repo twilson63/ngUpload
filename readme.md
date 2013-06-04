@@ -62,6 +62,12 @@ app.controller('Example5Ctrl', function ($scope) {
 * AngularJS (http://angularjs.org)
 * JQuery (http://jquery.org)
 
+## Install with bower
+
+```
+bower install ngUpload 
+```
+
 ## Usage
 
 Add to your html file
