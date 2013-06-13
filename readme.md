@@ -24,7 +24,7 @@ An AngularJS file upload directive.
        </p>
        <p>
            <input type="submit" class="btn" value="Submit" 
-             upload-submit="uploadComplete(contents, completed)" />
+             upload-submit="uploadComplete(content, completed)" />
        </p>
    </form>
    <div class="alert alert-info">Server Response: {{response | json}}</div>
