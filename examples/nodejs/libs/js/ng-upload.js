@@ -61,6 +61,9 @@ angular.module('ngUpload', [])
           // create a new iframe
           var iframe = angular.element("<iframe id='upload_iframe' name='upload_iframe' border='0' width='0' height='0' style='width: 0px; height: 0px; border: none; display: none' />");
 
+          // add the new iframe to application
+          form.parent().append(iframe);
+
           // attach function to load event of the iframe
           iframe.bind('load', function () {
             // get content - requires jQuery
@@ -76,9 +79,6 @@ angular.module('ngUpload', [])
             element.attr('disabled', null);
             element.attr('title', 'Click to start upload.');
           });
-
-          // add the new iframe to application
-          form.parent().append(iframe);
 
           scope.$apply(function () { 
             fn(scope, {content: "Please wait...", completed: false }); 

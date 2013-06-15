@@ -196,6 +196,7 @@ please use the following style guidelines
 * cristianocd (https://github.com/cristianocd)
 * Evgeniy Zatsepin (https://github.com/dizzy7)
 * Chris Tesene (https://github.com/ctesene)
+* denyo (https://github.com/denyo)
 
 ## Thanks
 

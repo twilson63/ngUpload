@@ -1,3 +1,7 @@
+# 0.3.7
+
+* #34 changed the bind to occur after the iframe is added to the dom.
+
 # 0.3.6
 
 * #41 Prevent file from uploading if the submit element is disabled
