@@ -68,6 +68,11 @@ angular.module('ngUpload', [])
           iframe.bind('load', function () {
             // get content - requires jQuery
             var content = iframe.contents().find('body').html();
+            try {
+              content = $.parseJSON(iframe.contents().find('body').text());
+            } catch (e) {
+              if (console) { console.log('WARN: XHR response is not valid json'); }
+            }
             // execute the upload response function in the active scope
             scope.$apply(function () { 
               fn(scope, { content: content, completed: true});

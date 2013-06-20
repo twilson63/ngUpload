@@ -38,7 +38,7 @@
                     <i>Button is <b>disabled</b> during upload, by default. (See Example 2 to change this).</i>
                 </p>
             </form>
-            <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
+            <div class="alert alert-info">Server Response: <div ng-bind-html-unsafe="uploadResponse"</div></div>
         </div>
         <div ng-controller="Example2Ctrl">
             <h1>Example 2 - Using Options: <b>uploadOptionsEnableControls</b> option (requirement: v0.1.1 and above)</h1>
@@ -62,7 +62,7 @@
                     <input type="submit" class="btn" value="Submit" upload-submit="uploadFile(content, completed)" />
                 </p>
             </form>
-            <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
+            <div class="alert alert-info">Server Response: <div ng-bind-html-unsafe="uploadResponse"</div></div>
         </div>
         <div ng-controller="Example3Ctrl">
             <h1>Example 3 - Submitting forms with any html element (requirement: v0.1.1 and above)</h1>
@@ -165,34 +165,34 @@
             $scope.foo = "Hello World";
             $scope.bar = function(content) {
                 console.log(content);
-                $scope.uploadResponse = content;
+                $scope.uploadResponse = content.msg;
             }
         });
 
         app.controller('Example2Ctrl', function ($scope) {
             $scope.uploadFile = function (content) {
                 console.log(content);
-                $scope.uploadResponse = content;
+                $scope.uploadResponse = content.msg;
             }
         });
 
         app.controller('Example3Ctrl', function ($scope) {
             $scope.uploadFile = function (content) {
                 console.log(content);
-                $scope.uploadResponse = content;
+                $scope.uploadResponse = content.msg;
             }
         });
 
         app.controller('Example4Ctrl', function ($scope) {
             $scope.uploadFile1 = function (content, completed) {
                 console.log(content);
-                $scope.uploadResponse1 = content;
+                $scope.uploadResponse1 = content.msg;
             };
 
             $scope.uploadFile2 = function (content, completed) {
                 console.log(content);
                 if (completed)
-                    $scope.uploadResponse2 = "[Status: Completed] " + content;
+                    $scope.uploadResponse2 = "[Status: Completed] " + content.msg;
                 else
                     $scope.uploadResponse2 = "[Status: Incomplete] Content ignored.  Check log the actual content.";
             }
@@ -200,9 +200,9 @@
 
         app.controller('Example5Ctrl', function ($scope) {
             $scope.uploadComplete = function (content, completed) {
-                if (completed && content.length > 0)
+                if (completed && content)
                 {
-                    $scope.response = JSON.parse(content); // Presumed content is a json string!
+                    $scope.response = content; // Presumed content is a json string!
                     $scope.response.style = {
                         color: $scope.response.color,
                         "font-weight": "bold"

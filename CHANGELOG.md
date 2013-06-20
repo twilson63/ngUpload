@@ -1,3 +1,7 @@
+# 0.3.8
+
+* #43 Handle cases to support application/json and type/text and type/html.
+
 # 0.3.7
 
 * #34 changed the bind to occur after the iframe is added to the dom.
