@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,17 +16,18 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>ngUpload</h1>
-        <p>An AngularJS Service for uploading files using iframe</p>
-
-        <p class="view"><a href="https://github.com/twilson63/ngUpload">View the Project on GitHub <small>twilson63/ngUpload</small></a></p>
-
+        <h1 class="header">ngUpload</h1>
+        <p class="header">An AngularJS Service for uploading files using iframe</p>
 
         <ul>
-          <li><a href="https://github.com/twilson63/ngUpload/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/twilson63/ngUpload/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/twilson63/ngUpload">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/twilson63/ngUpload/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/twilson63/ngUpload/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/twilson63/ngUpload">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/twilson63">twilson63</a></p>
+
+
       </header>
       <section>
         <h1>
@@ -34,7 +36,7 @@
 <p>An AngularJS file upload directive.  </p>
 
 <h2>
-<a name="037---for-updates-see-changelogmd" class="anchor" href="#037---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.7 - for updates see CHANGELOG.md</h2>
+<a name="038---for-updates-see-changelogmd" class="anchor" href="#038---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.8 - for updates see CHANGELOG.md</h2>
 
 <div class="highlight"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;p&gt;</span>
@@ -240,11 +242,10 @@ grunt uglify
 </ul>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/twilson63">twilson63</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
