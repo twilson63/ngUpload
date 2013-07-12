@@ -70,7 +70,6 @@ angular.module('ngUpload', [])
             var content = iframe.contents().find('body').html();
             try {
               content = $.parseJSON(iframe.contents().find('body').text());
-              if (console) { console.log(content); }
             } catch (e) {
               if (console) { console.log('WARN: XHR response is not valid json'); }
             }
