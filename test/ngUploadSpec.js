@@ -6,11 +6,16 @@ describe('ngUpload', function() {
     elm = angular.element(
       '<div>' +
         '<form action="/upload" ng-upload>' +
+          '<input id="test-input" type="text" name="hamster" ng-model="hamster"></input>' +
           '<input type="file" name="foo"></input>' +
           '<input type="submit" value="submit" upload-submit="foo()"></input>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
+
+    // the ng-model of #test-input
+    scope.hamster="is el primo";
+
     $compile(elm)(scope);
     //scope.digest();
   }));
@@ -21,8 +26,6 @@ describe('ngUpload', function() {
     expect(form.attr('encoding')).toBe('multipart/form-data');
     expect(form.attr('target')).toBe('upload_iframe');
     expect(form.attr('method')).toBe('post');
-    
-
   });
   it('should set submit control', function() {
     var submit = elm.find('input[type="submit"]');
@@ -32,6 +35,14 @@ describe('ngUpload', function() {
     expect(iframe[0]).toBeDefined();    
     expect(submit.attr('disabled')).toBe('disabled');
     expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...' );
+  });
+  it('should set ng-model on inputs', function() {
+    var submit = elm.find('input[type="submit"]');
+    expect(submit.attr('upload-submit')).toBeDefined();
+    submit.click();
+    var iframe = elm.find('#upload_iframe');
+    expect(iframe[0]).toBeDefined();
+    expect(elm.find('#test-input').val()).toBe('is el primo');
   });
   it('should not upload if the element is disabled', function() {
     var submit = elm.find('input[type="submit"]');
