@@ -70,6 +70,7 @@ angular.module('ngUpload', [])
             var content = iframe.contents().find('body').html();
             try {
               content = $.parseJSON(iframe.contents().find('body').text());
+              if (console) { console.log(content); }
             } catch (e) {
               if (console) { console.log('WARN: XHR response is not valid json'); }
             }
@@ -98,6 +99,10 @@ angular.module('ngUpload', [])
           // why do we need this???
           element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
 
+          form.find('*[ng-model]').each( function() {
+            $(this).attr('value', scope.$eval( $(this).attr('ng-model') ));
+          });
+          
           form.submit();
 
         }).attr('title', 'Click to start upload.');
@@ -108,6 +113,17 @@ angular.module('ngUpload', [])
     return {
       restrict: 'AC',
       link: function (scope, element, attrs) {
+        
+        // Options (just 1 for now) 
+        // Each option should be prefixed with 'upload-options-' or 'uploadOptions'
+        // {
+        //    // add the Rails CSRF hidden input to form
+        //    enableRailsCsrf: bool 
+        // }
+        
+        var options = {};
+        options.enableRailsCsrf = attrs.uploadOptionsEnableRailsCsrf;
+        
         element.attr("target", "upload_iframe");
         element.attr("method", "post");
         // Append a timestamp field to the url to prevent browser caching results
@@ -115,6 +131,17 @@ angular.module('ngUpload', [])
         element.attr("action", element.attr("action") + separator + "_t=" + new Date().getTime());
         element.attr("enctype", "multipart/form-data");
         element.attr("encoding", "multipart/form-data");
+
+        // If enabled, add csrf hidden input to form
+        if ( options.enableRailsCsrf ) {
+            $("<input />")
+              .attr("id", "upload-csrf-token")
+              .attr("type", "hidden")
+              .attr("name", $('meta[name=csrf-param]').attr('content') )
+              .val( $('meta[name=csrf-token]').attr('content') )
+              .appendTo(element);
+         
+        }
       }
     };
   }]);
