@@ -5,7 +5,7 @@ describe('ngUpload', function() {
   beforeEach(inject(function($rootScope, $compile) {
     elm = angular.element(
       '<div>' +
-        '<form action="/upload" ng-upload upload-options-enable-rails-csrf="true">' +
+        '<form action="/upload" ng-upload upload-options-enable-rails-csrf>' +
           '<input type="file" name="foo"></input>' +
           '<input type="submit" value="submit" upload-submit="foo()"></input>' +
         '</form>' +
@@ -27,7 +27,6 @@ describe('ngUpload', function() {
     expect(elm.find('#upload-csrf-token')[0]).toBeDefined();
     
     //expect(elm.find('#upload-csrf-token').val()).toBe('test_token');
-    
 
   });
 })

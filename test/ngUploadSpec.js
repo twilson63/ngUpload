@@ -6,12 +6,14 @@ describe('ngUpload', function() {
     elm = angular.element(
       '<div>' +
         '<form action="/upload" ng-upload>' +
-          '<input id="test-input" type="text" name="hamster" ng-model="hamster"></input>' +
+          '<input id="secret" type="hidden" name="secret" ng-model="test.secret"></input>' +
+          '<input id="title" type="text" name="title" ng-model="test.title"></input>' +
           '<input type="file" name="foo"></input>' +
           '<input type="submit" value="submit" upload-submit="foo()"></input>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
+    scope.test = {title: 'test123', secret: 'secret123' };
 
     // the ng-model of #test-input
     scope.hamster="is el primo";
@@ -27,6 +29,15 @@ describe('ngUpload', function() {
     expect(form.attr('target')).toBe('upload_iframe');
     expect(form.attr('method')).toBe('post');
   });
+  it('should set value from ng-model attribute for non-hidden fields', function() {
+      var submit = elm.find('input[type="submit"]');
+      expect(submit.attr('upload-submit')).toBeDefined();
+      submit.click();
+      var iframe = elm.find('#upload_iframe');
+
+      expect(elm.find('#title').val()).toEqual( scope.test.title );
+      expect(elm.find('#secret').val()).toEqual('');
+  });
   it('should set submit control', function() {
     var submit = elm.find('input[type="submit"]');
     expect(submit.attr('upload-submit')).toBeDefined();
@@ -35,14 +46,6 @@ describe('ngUpload', function() {
     expect(iframe[0]).toBeDefined();    
     expect(submit.attr('disabled')).toBe('disabled');
     expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...' );
-  });
-  it('should set ng-model on inputs', function() {
-    var submit = elm.find('input[type="submit"]');
-    expect(submit.attr('upload-submit')).toBeDefined();
-    submit.click();
-    var iframe = elm.find('#upload_iframe');
-    expect(iframe[0]).toBeDefined();
-    expect(elm.find('#test-input').val()).toBe('is el primo');
   });
   it('should not upload if the element is disabled', function() {
     var submit = elm.find('input[type="submit"]');
