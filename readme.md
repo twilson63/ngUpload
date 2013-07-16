@@ -142,6 +142,21 @@ angular.module('app', ['ngUpload'])
 });
 ```
 
+## Directive Options
+
+### ngUpload
+
+* `upload-options-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
+                               by adding a hidden form field with the csrf token.
+
+### uploadSubmit
+
+* `upload-options-enable-controls`: Whether to enable the submit button when uploading forms.
+* `upload-options-convert-hidden`: Set the value of hidden inputs to their `ng-model` attribute when the form is submitted.
+
+
+
+
 ## Example
 
 Example of forms that posts to NodeJS server are now included under the [/examples](https://github.com/twilson63/ngUpload/tree/master/examples) folder.
