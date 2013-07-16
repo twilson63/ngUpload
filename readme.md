@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive.  
 
-## 0.3.8 - for updates see CHANGELOG.md
+## 0.3.9 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload action="/upload-full-form">
@@ -15,7 +15,7 @@ An AngularJS file upload directive.
            <input type="text" name="gender" ng-model="gender" />
        </p>
        <p>
-           <label>Favourite Color:</label>
+           <label>Favorite Color:</label>
            <input type="text" name="color" ng-model="color"/>
        </p>
        <p>
@@ -212,6 +212,7 @@ please use the following style guidelines
 * Evgeniy Zatsepin (https://github.com/dizzy7)
 * Chris Tesene (https://github.com/ctesene)
 * denyo (https://github.com/denyo)
+* mguymon (https://github.com/mguymon)
 
 ## Thanks
 

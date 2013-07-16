@@ -9,7 +9,7 @@ app.use(express.static(__dirname));
 app.post('/upload', function (req, res) {
     setTimeout(
         function () {
-            //res.setHeader('Content-Type', 'text/html');
+            res.setHeader('Content-Type', 'text/html');
             if (req.files.length == 0 || req.files.file.size == 0)
                 res.send({ msg: 'No file uploaded at ' + new Date().toString() });
             else {
@@ -18,7 +18,8 @@ app.post('/upload', function (req, res) {
                     if (err)
                         throw err;
                     else
-                        res.send({ msg: '<b>"' + file.name + '"</b> uploaded to the server at ' + new Date().toString() });
+                        res.end("Hello");
+                        //res.send({ msg: '<b>"' + file.name + '"</b> uploaded to the server at ' + new Date().toString() });
                 });
             }
         },

@@ -1,3 +1,7 @@
+# 0.3.9
+
+* #50 Add option to enable rails csrf, copy ng-model values to input values
+
 # 0.3.8
 
 * #43 Handle cases to support application/json and type/text and type/html.

@@ -1,4 +1,4 @@
-// Version 0.3.8
+// Version 0.3.9
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
