@@ -1,6 +1,6 @@
 {
   "name": "ngUpload",
-  "version": "0.3.8",
+  "version": "0.3.10",
   "main": "ng-upload.js",
   "ignore": [
     "**/.*",
