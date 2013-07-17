@@ -30,3 +30,5 @@ _ReSharper*/
 packages
 PublishProfiles
 ngUpload.sln
+
+.DS_Store
