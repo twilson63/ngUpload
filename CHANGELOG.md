@@ -1,3 +1,7 @@
+# 0.3.10
+
+* removed .DS_Store and corrected bower version
+
 # 0.3.9
 
 * #50 Add option to enable rails csrf, copy ng-model values to input values
