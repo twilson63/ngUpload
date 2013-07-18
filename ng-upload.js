@@ -81,10 +81,15 @@ angular.module('ngUpload', [])
                         } catch (e) {
                             if (console) { console.log('WARN: XHR response is not valid json'); }
                         }
-                        // execute the upload response function in the active scope
-                        scope.$apply(function () {
-                            fn(scope, { content: content, completed: true});
-                        });
+                        // if outside a digest cycle, execute the upload response function in the active scope
+                        // else execute the upload response function in the current digest
+                        if (!scope.$$phase) {
+                            scope.$apply(function () {
+                                fn(scope, { content: content, completed: true });
+                            });
+                        } else {
+                            fn(scope, { content: content, completed: true });
+                        }
                         // remove iframe
                         if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
                             setTimeout(function () { iframe.remove(); }, 250);
@@ -93,9 +98,13 @@ angular.module('ngUpload', [])
                         element.attr('title', 'Click to start upload.');
                     });
 
-                    scope.$apply(function () {
+                    if (!scope.$$phase) {
+                        scope.$apply(function () {
+                            fn(scope, {content: "Please wait...", completed: false });
+                        });
+                    } else {
                         fn(scope, {content: "Please wait...", completed: false });
-                    });
+                    }
 
                     var enabled = true;
                     if (!options.enableControls) {
