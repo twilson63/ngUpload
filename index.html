@@ -36,7 +36,7 @@
 <p>An AngularJS file upload directive.  </p>
 
 <h2>
-<a name="038---for-updates-see-changelogmd" class="anchor" href="#038---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.8 - for updates see CHANGELOG.md</h2>
+<a name="0311---for-updates-see-changelogmd" class="anchor" href="#0311---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.11 - for updates see CHANGELOG.md</h2>
 
 <div class="highlight"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;p&gt;</span>
@@ -48,7 +48,7 @@
            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"gender"</span> <span class="na">ng-model=</span><span class="s">"gender"</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;/p&gt;</span>
        <span class="nt">&lt;p&gt;</span>
-           <span class="nt">&lt;label&gt;</span>Favourite Color:<span class="nt">&lt;/label&gt;</span>
+           <span class="nt">&lt;label&gt;</span>Favorite Color:<span class="nt">&lt;/label&gt;</span>
            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"color"</span> <span class="na">ng-model=</span><span class="s">"color"</span><span class="nt">/&gt;</span>
        <span class="nt">&lt;/p&gt;</span>
        <span class="nt">&lt;p&gt;</span>
@@ -174,6 +174,24 @@
 </pre></div>
 
 <h2>
+<a name="directive-options" class="anchor" href="#directive-options"><span class="octicon octicon-link"></span></a>Directive Options</h2>
+
+<h3>
+<a name="ngupload-1" class="anchor" href="#ngupload-1"><span class="octicon octicon-link"></span></a>ngUpload</h3>
+
+<ul>
+<li>
+<code>upload-options-rails-csrf</code>: Turns on support for <a href="http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf">Rails' CSRF</a> 
+                           by adding a hidden form field with the csrf token.</li>
+</ul><h3>
+<a name="uploadsubmit" class="anchor" href="#uploadsubmit"><span class="octicon octicon-link"></span></a>uploadSubmit</h3>
+
+<ul>
+<li>
+<code>upload-options-enable-controls</code>: Whether to enable the submit button when uploading forms.</li>
+<li>
+<code>upload-options-convert-hidden</code>: Set the value of hidden inputs to their <code>ng-model</code> attribute when the form is submitted.</li>
+</ul><h2>
 <a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
 
 <p>Example of forms that posts to NodeJS server are now included under the <a href="https://github.com/twilson63/ngUpload/tree/master/examples">/examples</a> folder.</p>
@@ -232,6 +250,7 @@ grunt uglify
 <li>Evgeniy Zatsepin (<a href="https://github.com/dizzy7">https://github.com/dizzy7</a>)</li>
 <li>Chris Tesene (<a href="https://github.com/ctesene">https://github.com/ctesene</a>)</li>
 <li>denyo (<a href="https://github.com/denyo">https://github.com/denyo</a>)</li>
+<li>mguymon (<a href="https://github.com/mguymon">https://github.com/mguymon</a>)</li>
 </ul><h2>
 <a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>Thanks</h2>
 
