@@ -74,8 +74,8 @@ angular.module('ngUpload', [])
 
                     // attach function to load event of the iframe
                     iframe.bind('load', function () {
-                        // get content using native DOM
-                        // previous use of jQuery triggers IE jQuery bug http://bugs.jquery.com/ticket/13936
+                        // get content using native DOM. use of jQuery to retrieve content triggers IE bug 
+                        // http://bugs.jquery.com/ticket/13936
                         var nativeIframe = iframe[0];                       
                         var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
                         var content = iFrameDoc.body.innerHTML;          
