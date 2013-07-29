@@ -202,6 +202,7 @@
             $scope.uploadComplete = function (content, completed) {
                 if (completed && content)
                 {
+                  console.log(content);
                     $scope.response = content; // Presumed content is a json string!
                     $scope.response.style = {
                         color: $scope.response.color,

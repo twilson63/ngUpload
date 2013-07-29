@@ -1,4 +1,4 @@
-// Version 0.3.9
+// Version (see package.json)
 // AngularJS simple file upload directive
 // this directive uses an iframe as a target
 // to enable the uploading of files without
@@ -74,17 +74,25 @@ angular.module('ngUpload', [])
 
                     // attach function to load event of the iframe
                     iframe.bind('load', function () {
-                        // get content - requires jQuery
-                        var content = iframe.contents().find('body').html();
+                        // get content using native DOM. use of jQuery to retrieve content triggers IE bug 
+                        // http://bugs.jquery.com/ticket/13936
+                        var nativeIframe = iframe[0];                       
+                        var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
+                        var content = iFrameDoc.body.innerHTML;          
                         try {
-                            content = $.parseJSON(iframe.contents().find('body').text());
+                            content = $.parseJSON(content);
                         } catch (e) {
                             if (console) { console.log('WARN: XHR response is not valid json'); }
                         }
-                        // execute the upload response function in the active scope
-                        scope.$apply(function () {
-                            fn(scope, { content: content, completed: true});
-                        });
+                        // if outside a digest cycle, execute the upload response function in the active scope
+                        // else execute the upload response function in the current digest
+                        if (!scope.$$phase) {
+                            scope.$apply(function () {
+                                fn(scope, { content: content, completed: true });
+                            });
+                        } else {
+                            fn(scope, { content: content, completed: true });
+                        }
                         // remove iframe
                         if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
                             setTimeout(function () { iframe.remove(); }, 250);
@@ -93,9 +101,13 @@ angular.module('ngUpload', [])
                         element.attr('title', 'Click to start upload.');
                     });
 
-                    scope.$apply(function () {
+                    if (!scope.$$phase) {
+                        scope.$apply(function () {
+                            fn(scope, {content: "Please wait...", completed: false });
+                        });
+                    } else {
                         fn(scope, {content: "Please wait...", completed: false });
-                    });
+                    }
 
                     var enabled = true;
                     if (!options.enableControls) {

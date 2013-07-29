@@ -18,8 +18,8 @@ app.post('/upload', function (req, res) {
                     if (err)
                         throw err;
                     else
-                        res.end("Hello");
-                        //res.send({ msg: '<b>"' + file.name + '"</b> uploaded to the server at ' + new Date().toString() });
+                        //res.end("Hello");
+                        res.send({ msg: '<b>"' + file.name + '"</b> uploaded to the server at ' + new Date().toString() });
                 });
             }
         },
@@ -33,10 +33,13 @@ app.post('/upload-full-form', function (req, res) {
     var pictureUrl = '/path/to/default/pictures';
     var fileUploadMessage = '';
     // process file
-    if (req.files.length == 0 || req.files.file.size == 0)
-        fileUploadMessage = 'No file uploaded at ' + new Date().toString();
+    if (!req.files.file || req.files.file.size == 0) {
+      fileUploadMessage = 'No file uploaded at ' + new Date().toString();
+      res.send(fileUploadMessage);
+    }
     else {
         var file = req.files.file;
+       
         fs.unlink(file.path, function (err) {
             if (err)
                 throw err;
@@ -51,7 +54,7 @@ app.post('/upload-full-form', function (req, res) {
                     color: req.param('color'),
                     pictureUrl: pictureUrl
                 }
-
+                
                 res.send(JSON.stringify(responseObj));
             }             
         });
