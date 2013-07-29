@@ -1,3 +1,7 @@
+# 0.3.12
+
+* #56 added fixes for IE 9 and IE 10 from https://github.com/trov-codystebbins
+
 # 0.3.10
 
 * removed .DS_Store and corrected bower version
