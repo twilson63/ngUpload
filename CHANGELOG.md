@@ -1,3 +1,7 @@
+# 0.3.13
+
+* cleaned up some unnecessary files to make distribution lean
+
 # 0.3.12
 
 * #56 added fixes for IE 9 and IE 10 from https://github.com/trov-codystebbins
