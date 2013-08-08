@@ -10,6 +10,7 @@
     "nuget",
     "test",
     ".bower.json",
+    ".gitignore",
     "bower.json",
     "Gruntfile.js",
     "package.json",
