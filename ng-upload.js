@@ -78,7 +78,7 @@ angular.module('ngUpload', [])
                         // http://bugs.jquery.com/ticket/13936
                         var nativeIframe = iframe[0];                       
                         var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
-                        var content = iFrameDoc.body.innerHTML;          
+                        var content = iFrameDoc.body.innerText || iFrameDoc.body.textContent;
                         try {
                             content = $.parseJSON(content);
                         } catch (e) {
