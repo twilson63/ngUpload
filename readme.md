@@ -213,6 +213,7 @@ please use the following style guidelines
 * Chris Tesene (https://github.com/ctesene)
 * denyo (https://github.com/denyo)
 * mguymon (https://github.com/mguymon)
+* marek-stoj (https://github.com/marek-stoj)
 
 ## Thanks
 
