@@ -1,3 +1,7 @@
+# 0.3.14 
+
+* Changed the way content of the upload iframe is obtained...
+
 # 0.3.13
 
 * cleaned up some unnecessary files to make distribution lean
