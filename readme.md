@@ -146,7 +146,7 @@ angular.module('app', ['ngUpload'])
 
 ### ngUpload
 
-* `upload-options-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
+* `upload-options-enable-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
                                by adding a hidden form field with the csrf token.
 
 ### uploadSubmit
