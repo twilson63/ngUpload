@@ -1,3 +1,8 @@
+# 0.3.18
+
+* Modified bower.json to allow for all future versions of angular and
+  jquery
+
 # 0.3.14 
 
 * Changed the way content of the upload iframe is obtained...
