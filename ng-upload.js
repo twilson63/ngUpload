@@ -25,6 +25,19 @@
 //
 angular.module('ngUpload', [])
     .directive('uploadSubmit', ['$parse', function($parse) {
+        // Utility function to get the closest parent element with a given tag
+        function getParentNodeByTagName(element, tagName) {
+            element = angular.element(element);
+            var parent = element.parent();
+            tagName = tagName.toLowerCase();
+
+            if ( parent && parent[0].tagName.toLowerCase() === tagName ) {
+                return parent;
+            } else {
+                return !parent ? null : getParentNodeByTagName(parent, tagName);
+            }
+        }
+
         return {
             restrict: 'AC',
             link: function(scope, element, attrs) {
@@ -45,8 +58,8 @@ angular.module('ngUpload', [])
                     options.convertHidden = attrs.uploadOptionsConvertHidden != "false";
                 }
 
-                // submit the form - requires jQuery
-                var form = element.parents('form');
+                // submit the form
+                var form = getParentNodeByTagName(element, 'form');
 
                 // Retrieve the callback function
                 var fn = $parse(attrs.uploadSubmit);
