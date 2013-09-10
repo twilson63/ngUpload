@@ -46,7 +46,7 @@ angular.module('ngUpload', [])
                 }
 
                 // submit the form - requires jQuery
-                var form = angular.element(element).parents('form');
+                var form = element.parents('form');
 
                 // Retrieve the callback function
                 var fn = $parse(attrs.uploadSubmit);
