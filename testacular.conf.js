@@ -10,7 +10,6 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'libs/jquery-1.9.1.min.js',
   'libs/angular.js',
   'libs/angular-mocks.js',
   'ng-upload.js',
