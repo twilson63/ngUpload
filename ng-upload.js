@@ -149,7 +149,21 @@ angular.module('ngUpload', [])
             }
         };
     }])
-    .directive('ngUpload', ['$parse', function ($parse) {
+    .directive('ngUpload', ['$parse', '$document', function ($parse, $document) {
+        // Utility function to get meta tag with a given name attribute
+        function getMetaTagWithName(name) {
+            var head = $document.find('head');
+            var match;
+
+            angular.forEach(head.find('meta'), function(element) {
+                if ( element.getAttribute('name') === name ) {
+                    match = element;
+                }
+            });
+
+            return angular.element(match);
+        }
+
         return {
             restrict: 'AC',
             link: function (scope, element, attrs) {
@@ -177,13 +191,13 @@ angular.module('ngUpload', [])
 
                 // If enabled, add csrf hidden input to form
                 if ( options.enableRailsCsrf ) {
-                    $("<input />")
-                        .attr("id", "upload-csrf-token")
-                        .attr("type", "hidden")
-                        .attr("name", $('meta[name=csrf-param]').attr('content') )
-                        .val( $('meta[name=csrf-token]').attr('content') )
-                        .appendTo(element);
+                    var input = angular.element("<input />");
+                        input.attr("class", "upload-csrf-token");
+                        input.attr("type", "hidden");
+                        input.attr("name", getMetaTagWithName('csrf-param').attr('content'));
+                        input.val(getMetaTagWithName('csrf-token').attr('content'));
 
+                    element.append(input);
                 }
             }
         };
