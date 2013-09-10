@@ -89,11 +89,11 @@ angular.module('ngUpload', [])
                     iframe.bind('load', function () {
                         // get content using native DOM. use of jQuery to retrieve content triggers IE bug 
                         // http://bugs.jquery.com/ticket/13936
-                        var nativeIframe = iframe[0];                       
+                        var nativeIframe = iframe[0];
                         var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
-                        var content = iFrameDoc.body.innerText || iFrameDoc.body.textContent;
+                        var content = iFrameDoc.body.innerHTML;
                         try {
-                            content = $.parseJSON(content);
+                            content = JSON.parse(content);
                         } catch (e) {
                             if (console) { console.log('WARN: XHR response is not valid json'); }
                         }
