@@ -133,12 +133,17 @@ angular.module('ngUpload', [])
 
                     // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
                     if (options.convertHidden) {
-                        form.find(':hidden[ng-model]').each( function() {
-                            $(this).attr('value', scope.$eval( $(this).attr('ng-model') ));
+                        angular.forEach(form.find('input'), function(element) {
+                            element = angular.element(element);
+                            if (element.attr('ng-model') &&
+                                element.attr('type') &&
+                                element.attr('type') == 'hidden') {
+                                element.attr('value', scope.$eval(element.attr('ng-model')));
+                            }
                         });
                     }
 
-                    form.submit();
+                    form[0].submit();
 
                 }).attr('title', 'Click to start upload.');
             }
