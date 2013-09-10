@@ -6,10 +6,10 @@ describe('ngUpload', function() {
     elm = angular.element(
       '<div>' +
         '<form action="/upload" ng-upload>' +
-          '<input id="secret" type="hidden" name="secret" ng-model="test.secret"></input>' +
-          '<input id="title" type="text" name="title" ng-model="test.title"></input>' +
+          '<input class="secret-input" id="secret" type="hidden" name="secret" ng-model="test.secret"></input>' +
+          '<input class="title-input" id="title" type="text" name="title" ng-model="test.title"></input>' +
           '<input type="file" name="foo"></input>' +
-          '<input type="submit" value="submit" upload-submit="foo()"></input>' +
+          '<input class="submit-button" type="submit" value="submit" upload-submit="foo()"></input>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
@@ -30,29 +30,28 @@ describe('ngUpload', function() {
     expect(form.attr('method')).toBe('post');
   });
   it('should set value from ng-model attribute for non-hidden fields', function() {
-      var submit = elm.find('input[type="submit"]');
-      expect(submit.attr('upload-submit')).toBeDefined();
+      var submit = elm[0].getElementsByClassName('submit-button')[0];
       submit.click();
-      var iframe = elm.find('#upload_iframe');
 
-      expect(elm.find('#title').val()).toEqual( scope.test.title );
-      expect(elm.find('#secret').val()).toEqual('');
+      expect(angular.element(elm[0].getElementsByClassName('title-input')[0]).val()).toEqual( scope.test.title );
+      expect(angular.element(elm[0].getElementsByClassName('secret-input')[0]).val()).toEqual('');
   });
   it('should set submit control', function() {
-    var submit = elm.find('input[type="submit"]');
-    expect(submit.attr('upload-submit')).toBeDefined();
+    var submit = elm[0].getElementsByClassName('submit-button')[0];
+    expect(submit.getAttribute('upload-submit')).toBeDefined();
     submit.click();
-    var iframe = elm.find('#upload_iframe');
-    expect(iframe[0]).toBeDefined();    
-    expect(submit.attr('disabled')).toBe('disabled');
-    expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...' );
+    var iframe = elm[0].getElementsByTagName('iframe')[0];
+    expect(iframe).toBeDefined();
+ 
+    expect(submit.getAttribute('disabled')).toBe('disabled');
+    expect(submit.getAttribute('title')).toBe('[DISABLED]: Uploading, please wait...' );
   });
   it('should not upload if the element is disabled', function() {
-    var submit = elm.find('input[type="submit"]');
-    submit.attr('disabled','disabled');      
-    expect(submit.attr('disabled')).toBeDefined();
+    var submit = elm[0].getElementsByClassName('submit-button')[0];
+    submit.setAttribute('disabled','disabled');
+    expect(submit.getAttribute('disabled')).toBeDefined();
     submit.click();
-    var iframe = elm.find('#upload_iframe');    
+    var iframe = elm[0].getElementsByTagName('iframe');
     expect(iframe.length).toEqual(0);
   });
 

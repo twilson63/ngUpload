@@ -26,7 +26,7 @@ describe('ngUpload', function() {
   });
   it('should set submit control', function() {
     var submit = elm.find('button');
-    submit.click();
+    submit[0].click();
     var iframe = elm.find('#upload_iframe');
     expect(iframe).toBeDefined();
     expect(submit.attr('disabled')).toBe('disabled');

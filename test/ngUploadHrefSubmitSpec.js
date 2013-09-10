@@ -25,11 +25,11 @@ describe('ngUpload', function() {
 
   });
   it('should set submit control', function() {
-    var submit = elm.find('a.baz');
+    var submit = elm[0].getElementsByClassName('baz')[0];
     submit.click();
-    var iframe = elm.find('#upload_iframe');
+    var iframe = elm[0].getElementsByTagName('iframe')[0];
     expect(iframe).toBeDefined();
-    expect(submit.attr('disabled')).toBe('disabled');
-    expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...');
+    expect(submit.getAttribute('disabled')).toBe('disabled');
+    expect(submit.getAttribute('title')).toBe('[DISABLED]: Uploading, please wait...');
   });
 })
