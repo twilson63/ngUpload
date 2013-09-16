@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive.  
 
-## 0.3.18 - for updates see CHANGELOG.md
+## 0.3.19 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload action="/upload-full-form">

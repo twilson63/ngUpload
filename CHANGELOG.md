@@ -1,3 +1,7 @@
+# 0.3.19
+
+* Removed JQuery Dependency re: https://github.com/intelekshual
+
 # 0.3.18
 
 * Modified bower.json to allow for all future versions of angular and
