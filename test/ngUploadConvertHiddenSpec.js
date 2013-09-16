@@ -6,9 +6,9 @@ describe('ngUpload', function() {
         elm = angular.element(
             '<div>' +
                 '<form action="/upload" ng-upload>' +
-                '<input id="secret-field" type="hidden" name="secret_field" ng-model="secret"></input>' +
+                '<input class="secret-field" type="hidden" name="secret_field" ng-model="secret"></input>' +
                 '<input type="file" name="foo"></input>' +
-                '<input type="submit" value="submit" upload-submit="foo()" upload-options-convert-hidden></input>' +
+                '<input class="submit-button" type="submit" value="submit" upload-submit="foo()" upload-options-convert-hidden></input>' +
                 '</form>' +
                 '</div>');
         scope = $rootScope;
@@ -21,13 +21,12 @@ describe('ngUpload', function() {
         var form = elm.find('form');
         expect(form).toBeDefined();
 
-        var submit = elm.find('input[type="submit"]');
+        var submit = elm[0].getElementsByClassName('submit-button')[0];
         submit.click();
 
-        var iframe = elm.find('#upload_iframe');
-        expect(iframe[0]).toBeDefined();
+        var iframe = elm[0].getElementsByTagName('iframe')[0];
+        expect(iframe).toBeDefined();
 
-        expect(elm.find('#secret-field').val()).toEqual("test123");
-
+        expect(elm[0].getElementsByClassName('secret-field')[0].value).toEqual("test123");
     });
-})
+});
