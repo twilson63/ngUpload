@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive.  
 
-## 0.3.19 - for updates see CHANGELOG.md
+## 0.3.20 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload action="/upload-full-form">
@@ -60,7 +60,6 @@ app.controller('Example5Ctrl', function ($scope) {
 ## Requirements
 
 * AngularJS (http://angularjs.org)
-* JQuery (http://jquery.org)
 
 ## Install with Bower
 
@@ -167,9 +166,9 @@ Needs Chrome Installed.
 
 ``` sh
 npm install
-npm install testacular -g
+npm install grunt-cli -g
 
-testacular start
+npm test
 ```
 
 ## jshint

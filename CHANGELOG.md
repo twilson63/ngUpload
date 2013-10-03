@@ -1,3 +1,7 @@
+# 0.3.20
+
+* #72 Add beforeSubmit callback
+
 # 0.3.19
 
 * Removed JQuery Dependency re: https://github.com/intelekshual
