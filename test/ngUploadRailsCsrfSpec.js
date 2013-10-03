@@ -12,7 +12,6 @@ describe('ngUpload', function() {
       '</div>');
     scope = $rootScope;
     $compile(elm)(scope);
-    //scope.digest();
     
   }));
   it('should set csrf hidden field', function() {
@@ -26,8 +25,6 @@ describe('ngUpload', function() {
     expect(iframe).toBeDefined();
 
     expect(elm[0].getElementsByClassName('upload-csrf-token')[0]).toBeDefined();
-    
-    //expect(elm.find('#upload-csrf-token').val()).toBe('test_token');
 
   });
 })

@@ -32,6 +32,7 @@ app.post('/upload-full-form', function (req, res) {
 
     var pictureUrl = '/path/to/default/pictures';
     var fileUploadMessage = '';
+    
     // process file
     if (!req.files.file || req.files.file.size == 0) {
       fileUploadMessage = 'No file uploaded at ' + new Date().toString();

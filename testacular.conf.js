@@ -5,11 +5,9 @@
 // base path, that will be used to resolve files and exclude
 basePath = '';
 
-
+frameworks = ['jasmine']
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
   'libs/angular.js',
   'libs/angular-mocks.js',
   'ng-upload.js',
@@ -42,7 +40,7 @@ colors = true;
 
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-logLevel = LOG_INFO;
+logLevel = karma.LOG_INFO;
 
 
 // enable / disable watching file and executing tests whenever any file changes

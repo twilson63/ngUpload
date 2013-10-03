@@ -34,13 +34,31 @@ module.exports = function(grunt) {
         pushTo: 'origin',
         gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
       }
+    },
+    karma: {
+      unit: {
+        options: {
+          frameworks: ['jasmine'],
+          browsers: ['Chrome'],
+          files: [
+            'libs/jquery-1.9.1.min.js',
+            'libs/angular.js',
+            'libs/angular-mocks.js',
+            'ng-upload.js',
+            'test/**/*Spec.js'
+          ],
+          singleRun: true
+        }
+      }
     }
   });
+
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bump');
-  
+  grunt.loadNpmTasks('grunt-karma');
+
   grunt.registerTask('default', ['jshint', 'uglify']);
 
 }

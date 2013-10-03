@@ -58,7 +58,11 @@ angular.module('ngUpload', [])
                     options.convertHidden = attrs.uploadOptionsConvertHidden != "false";
                 }
 
-                // submit the form
+                if (attrs.hasOwnProperty( "uploadOptionBeforeSubmit" ) ) {
+                    options.beforeSubmitCallback = attrs.uploadOptionBeforeSubmit;
+                }
+
+                // submit the form 
                 var form = getParentNodeByTagName(element, 'form');
 
                 // Retrieve the callback function
@@ -77,6 +81,17 @@ angular.module('ngUpload', [])
 
                     if (element.attr('disabled')) {
                         return;
+                    }
+
+                    if ( undefined !== options.beforeSubmitCallback ) {
+                        var continueSubmit = scope.$apply(function () {
+                            return scope[options.beforeSubmitCallback](scope, $event);
+                        });
+
+                        // If beforeSubmit callback returns false, skip
+                        if ( continueSubmit === false ) {
+                            return;
+                        }
                     }
 
                     // create a new iframe
