@@ -36,9 +36,9 @@
 <p>An AngularJS file upload directive.  </p>
 
 <h2>
-<a name="0315---for-updates-see-changelogmd" class="anchor" href="#0315---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.15 - for updates see CHANGELOG.md</h2>
+<a name="0320---for-updates-see-changelogmd" class="anchor" href="#0320---for-updates-see-changelogmd"><span class="octicon octicon-link"></span></a>0.3.20 - for updates see CHANGELOG.md</h2>
 
-<div class="highlight"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
+<div class="highlight highlight-html"><pre>   <span class="nt">&lt;form</span> <span class="na">ng-upload</span> <span class="na">action=</span><span class="s">"/upload-full-form"</span><span class="nt">&gt;</span>
        <span class="nt">&lt;p&gt;</span>
            <span class="nt">&lt;label&gt;</span>Fullname:<span class="nt">&lt;/label&gt;</span>
            <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"fullname"</span> <span class="na">ng-model=</span><span class="s">"fullname"</span> <span class="nt">/&gt;</span>
@@ -71,7 +71,7 @@
 
 <p>... and the context ngController's source is:</p>
 
-<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'Example5Ctrl'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'Example5Ctrl'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$scope</span><span class="p">.</span><span class="nx">uploadComplete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">completed</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">$scope</span><span class="p">.</span><span class="nx">response</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span> <span class="c1">// Presumed content is a json string!</span>
@@ -95,7 +95,6 @@
 
 <ul>
 <li>AngularJS (<a href="http://angularjs.org">http://angularjs.org</a>)</li>
-<li>JQuery (<a href="http://jquery.org">http://jquery.org</a>)</li>
 </ul><h2>
 <a name="install-with-bower" class="anchor" href="#install-with-bower"><span class="octicon octicon-link"></span></a>Install with Bower</h2>
 
@@ -112,7 +111,7 @@
 
 <p>Create a basic form with a file input element</p>
 
-<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
@@ -131,7 +130,7 @@
 <li>Make sure you import the <strong>'ngUpload'</strong> module in your angularJS application.</li>
 </ul><p>Applying this rules, the sample above can be re-written as</p>
 
-<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
@@ -143,7 +142,7 @@
 
 <p>or</p>
 
-<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">ng-app=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"mainCtrl"</span><span class="nt">&gt;</span>
    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"/uploads"</span> <span class="na">ng-upload</span><span class="nt">&gt;</span> 
      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"avatar"</span><span class="nt">&gt;&lt;/input&gt;</span>
@@ -159,7 +158,7 @@
 
 <p>The AngularJS controller for the above samples is given as:</p>
 
-<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'ngUpload'</span><span class="p">])</span>
+<div class="highlight highlight-js"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'ngUpload'</span><span class="p">])</span>
   <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">'mainCtrl'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">$scope</span><span class="p">.</span><span class="nx">results</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">completed</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">completed</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
@@ -201,16 +200,16 @@
 
 <p>Needs Chrome Installed.</p>
 
-<div class="highlight"><pre>npm install
-npm install testacular -g
+<div class="highlight highlight-sh"><pre>npm install
+npm install grunt-cli -g
 
-testacular start
+npm <span class="nb">test</span>
 </pre></div>
 
 <h2>
 <a name="jshint" class="anchor" href="#jshint"><span class="octicon octicon-link"></span></a>jshint</h2>
 
-<div class="highlight"><pre>npm install
+<div class="highlight highlight-sh"><pre>npm install
 npm install grunt-cli -g
 
 grunt jshint
@@ -219,7 +218,7 @@ grunt jshint
 <h2>
 <a name="minify" class="anchor" href="#minify"><span class="octicon octicon-link"></span></a>Minify</h2>
 
-<div class="highlight"><pre>npm install
+<div class="highlight highlight-sh"><pre>npm install
 npm install grunt-cli -g
 
 grunt uglify
@@ -252,6 +251,7 @@ grunt uglify
 <li>denyo (<a href="https://github.com/denyo">https://github.com/denyo</a>)</li>
 <li>mguymon (<a href="https://github.com/mguymon">https://github.com/mguymon</a>)</li>
 <li>marek-stoj (<a href="https://github.com/marek-stoj">https://github.com/marek-stoj</a>)</li>
+<li>Robert Coker (<a href="https://github.com/intelekshual">https://github.com/intelekshual</a>)</li>
 </ul><h2>
 <a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>Thanks</h2>
 
