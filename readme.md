@@ -214,6 +214,7 @@ please use the following style guidelines
 * mguymon (https://github.com/mguymon)
 * marek-stoj (https://github.com/marek-stoj)
 * Robert Coker (https://github.com/intelekshual)
+* Michael Guymon (https://github.com/mguymon)
 
 ## Thanks
 
