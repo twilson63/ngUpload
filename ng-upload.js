@@ -76,7 +76,7 @@ angular.module('ngUpload', [])
                 element.bind('click', function($event) {
                     // prevent default behavior of click
                     if ($event) {
-                        $event.preventDefault = true;
+                       $event.preventDefault();
                     }
 
                     if (element.attr('disabled')) {
@@ -90,7 +90,7 @@ angular.module('ngUpload', [])
 
                         // If beforeSubmit callback returns false, skip
                         if ( continueSubmit === false ) {
-                            return;
+                            return false;
                         }
                     }
 
@@ -106,7 +106,10 @@ angular.module('ngUpload', [])
                         // http://bugs.jquery.com/ticket/13936
                         var nativeIframe = iframe[0];
                         var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
-                        var content = iFrameDoc.body.innerHTML;
+
+                        // Cross browser text (sans html) retrieval from the iframe - http://www.quirksmode.org/dom/w3c_html.html
+                        var content = iFrameDoc.body.innerText || iFrameDoc.body.textContent;
+
                         try {
                             content = JSON.parse(content);
                         } catch (e) {
