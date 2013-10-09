@@ -76,7 +76,7 @@ angular.module('ngUpload', [])
                 element.bind('click', function($event) {
                     // prevent default behavior of click
                     if ($event) {
-                        $event.preventDefault = true;
+                       $event.preventDefault();
                     }
 
                     if (element.attr('disabled')) {
@@ -90,7 +90,7 @@ angular.module('ngUpload', [])
 
                         // If beforeSubmit callback returns false, skip
                         if ( continueSubmit === false ) {
-                            return;
+                            return false;
                         }
                     }
 
