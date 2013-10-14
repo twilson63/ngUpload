@@ -141,6 +141,10 @@ angular.module('app', ['ngUpload'])
 });
 ```
 
+* Working in IE
+
+In order for ngUpload to respond correctly from IE, your server needs to return the response back as `text/html` not `application/json`
+
 ## Directive Options
 
 ### ngUpload

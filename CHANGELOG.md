@@ -1,3 +1,7 @@
+# 0.3.21
+
+* #75 Fix issue with <pre> tags on response back, should also address #77
+
 # 0.3.20
 
 * #72 Add beforeSubmit callback
