@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive.  
 
-## 0.3.20 - for updates see CHANGELOG.md
+## 0.3.21 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload action="/upload-full-form">
@@ -143,7 +143,8 @@ angular.module('app', ['ngUpload'])
 
 * Working in IE
 
-In order for ngUpload to respond correctly from IE, your server needs to return the response back as `text/html` not `application/json`
+In order, for ngUpload to respond correctly for IE, your server needs to return the response back as `html/text` not `application/json`
+
 
 ## Directive Options
 
