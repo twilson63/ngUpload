@@ -1,3 +1,7 @@
+# 0.4.0
+* Same as 0.3.21 just bumped to stable branch all new modifications will 
+occur on 0.5.x 
+
 # 0.3.21
 
 * #75 Fix issue with <pre> tags on response back, should also address #77
