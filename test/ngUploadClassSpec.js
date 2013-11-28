@@ -29,7 +29,5 @@ describe('ngUpload', function() {
     submit[0].click();
     var iframe = elm.find('#upload_iframe');
     expect(iframe).toBeDefined();
-    expect(submit.attr('disabled')).toBe('disabled');
-    expect(submit.attr('title')).toBe('[DISABLED]: Uploading, please wait...');
   });
 })
