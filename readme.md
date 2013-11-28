@@ -144,6 +144,7 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
                                by adding a hidden form field with the csrf token.
 
 * `ng-upload-loading`: function that gets triggered when the upload starts.
+* `ng-upload-before-submit`: function that gets triggered before the upload starts and if the function returns false it will cancel the submit.
 
 ### uploadSubmit
 
