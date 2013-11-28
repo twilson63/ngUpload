@@ -5,9 +5,9 @@ describe('ngUpload', function() {
   beforeEach(inject(function($rootScope, $compile) {
     elm = angular.element(
       '<div>' +
-        '<form action="/upload" ng-upload upload-options-enable-rails-csrf>' +
+        '<form action="/upload" ng-upload="foo()" upload-options-enable-rails-csrf>' +
           '<input type="file" name="foo"></input>' +
-          '<input class="submit-button" type="submit" value="submit" upload-submit="foo()"></input>' +
+          '<input class="submit-button" type="submit" value="submit"></input>' +
         '</form>' +
       '</div>');
     scope = $rootScope;

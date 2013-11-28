@@ -5,9 +5,9 @@ describe('ngUpload', function() {
   beforeEach(inject(function($rootScope, $compile) {
     elm = angular.element(
       '<div>' +
-        '<form action="/upload" ng-upload>' +
+        '<form action="/upload" ng-upload="bar()">' +
           '<input type="file" name="foo"></input>' +
-          '<a href="javascript: void(0);" class="baz" upload-submit="bar()">Upload</a>' +
+          '<a href="javascript: void(0);" class="baz" upload-submit>Upload</a>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
@@ -19,7 +19,7 @@ describe('ngUpload', function() {
     expect(form).toBeDefined();
     expect(form.attr('enctype')).toBe('multipart/form-data');
     expect(form.attr('encoding')).toBe('multipart/form-data');
-    expect(form.attr('target')).toBe('upload_iframe');
+    expect(form.attr('target')).toBe('upload-iframe-2');
     expect(form.attr('method')).toBe('post');
     
 

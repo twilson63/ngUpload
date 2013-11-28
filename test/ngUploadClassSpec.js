@@ -5,9 +5,9 @@ describe('ngUpload', function() {
   beforeEach(inject(function($rootScope, $compile) {
     elm = angular.element(
       '<div>' +
-        '<form action="/upload" class="ng-upload">' +
+        '<form action="/upload" class="ng-upload: bar()">' +
           '<input type="file" name="foo"></input>' +
-          '<button class="upload-submit: bar()">Upload</button>' +
+          '<button class="upload-submit">Upload</button>' +
         '</form>' +
       '</div>');
     scope = $rootScope;
@@ -19,7 +19,7 @@ describe('ngUpload', function() {
     expect(form).toBeDefined();
     expect(form.attr('enctype')).toBe('multipart/form-data');
     expect(form.attr('encoding')).toBe('multipart/form-data');
-    expect(form.attr('target')).toBe('upload_iframe');
+    expect(form.attr('target')).toBe('upload-iframe-2');
     expect(form.attr('method')).toBe('post');
     
 
@@ -27,7 +27,7 @@ describe('ngUpload', function() {
   it('should set submit control', function() {
     var submit = elm.find('button');
     submit[0].click();
-    var iframe = elm.find('#upload_iframe');
+    var iframe = elm.find('#upload-submit');
     expect(iframe).toBeDefined();
   });
 })

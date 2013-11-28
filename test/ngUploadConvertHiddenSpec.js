@@ -5,10 +5,10 @@ describe('ngUpload', function() {
     beforeEach(inject(function($rootScope, $compile) {
         elm = angular.element(
             '<div>' +
-                '<form action="/upload" ng-upload>' +
+                '<form action="/upload" ng-upload="foo()" upload-options-convert-hidden>' +
                 '<input class="secret-field" type="hidden" name="secret_field" ng-model="secret"></input>' +
                 '<input type="file" name="foo"></input>' +
-                '<input class="submit-button" type="submit" value="submit" upload-submit="foo()" upload-options-convert-hidden></input>' +
+                '<input class="submit-button" type="submit" value="submit"></input>' +
                 '</form>' +
                 '</div>');
         scope = $rootScope;

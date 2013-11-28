@@ -54,7 +54,8 @@ angular.module('ngUpload', [])
       }
     };
   }])
-  .directive('ngUpload', ["$log", "$parse", function ($log, $parse) {
+  .directive('ngUpload', ["$log", "$parse", "$document",
+    function ($log, $parse, $document) {
     var iframeID = 1;
     // Utility function to get meta tag with a given name attribute
     function getMetaTagWithName(name) {
@@ -143,7 +144,7 @@ angular.module('ngUpload', [])
         element.bind('submit', function uploadStart() {
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
-            angular.forEach(form.find('input'), function(element) {
+            angular.forEach(element.find('input'), function(element) {
               element = angular.element(element);
               if (element.attr('ng-model') &&
                 element.attr('type') &&
@@ -153,18 +154,26 @@ angular.module('ngUpload', [])
             });
           }
 
-          scope.$apply(function() {
+          if (!scope.$$phase) {
+            scope.$apply(function() {
+              if (loading) loading(scope);
+              setLoadingState(true);
+            });
+          } else {
             if (loading) loading(scope);
             setLoadingState(true);
-          });
-
+          }
         });
 
         // Finish upload
         iframe.bind('load', function uploadEnd() {
-          scope.$apply(function() {
+          if (!scope.$$phase) {
+            scope.$apply(function() {
+              setLoadingState(false);
+            });
+          } else {
             setLoadingState(false);
-          });
+          }
           // Get iframe body contents
           var bodyContent = (iframe[0].contentDocument ||
             iframe[0].contentWindow.document).body;
@@ -176,10 +185,19 @@ angular.module('ngUpload', [])
             content = bodyContent.innerHTML;
             $log.warn('Response is not valid JSON');
           }
-
-          scope.$apply(function() {
-            if (fn) fn(scope, { content: content });
-          });
+          // if outside a digest cycle, execute the upload response function in the active scope
+          // else execute the upload response function in the current digest
+          if (!scope.$$phase) {
+             scope.$apply(function () {
+                 fn(scope, { content: content});
+             });
+          } else {
+             fn(scope, { content: content});
+          }
+          // remove iframe
+          if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
+             setTimeout(function () { iframe.remove(); }, 250);
+          }
         });
       }
     };
