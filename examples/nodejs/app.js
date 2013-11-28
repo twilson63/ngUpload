@@ -55,7 +55,6 @@ app.post('/upload-full-form', function (req, res) {
                     color: req.param('color'),
                     pictureUrl: pictureUrl
                 }
-                
                 res.send(JSON.stringify(responseObj));
             }             
         });

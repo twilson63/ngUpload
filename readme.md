@@ -2,10 +2,10 @@
 
 An AngularJS file upload directive.  
 
-## 0.4.0 - for updates see CHANGELOG.md
+## 0.5.1 - for updates see CHANGELOG.md
 
 ``` html
-   <form ng-upload action="/upload-full-form">
+   <form ng-upload="uploadComplete(content)" action="/upload-full-form">
        <p>
            <label>Fullname:</label>
            <input type="text" name="fullname" ng-model="fullname" />
@@ -23,8 +23,7 @@ An AngularJS file upload directive.
            <input type="file" name="file" />
        </p>
        <p>
-           <input type="submit" class="btn" value="Submit" 
-             upload-submit="uploadComplete(content, completed)" />
+           <input type="submit" class="btn" value="Submit" ng-disabled="$isLoading"  />
        </p>
    </form>
    <div class="alert alert-info">Server Response: {{response | json}}</div>
@@ -39,20 +38,18 @@ An AngularJS file upload directive.
 
 ``` js
 app.controller('Example5Ctrl', function ($scope) {
-  $scope.uploadComplete = function (content, completed) {
-    if (completed && content.length > 0) {
-      $scope.response = JSON.parse(content); // Presumed content is a json string!
-      $scope.response.style = {
-        color: $scope.response.color,
-        "font-weight": "bold"
-      };
+  $scope.uploadComplete = function (content) {
+    $scope.response = JSON.parse(content); // Presumed content is a json string!
+    $scope.response.style = {
+      color: $scope.response.color,
+      "font-weight": "bold"
+    };
 
-      // Clear form (reason for using the 'ng-model' directive on the input elements)
-      $scope.fullname = '';
-      $scope.gender = '';
-      $scope.color = '';
-      // Look for way to clear the input[type=file] element
-    }
+    // Clear form (reason for using the 'ng-model' directive on the input elements)
+    $scope.fullname = '';
+    $scope.gender = '';
+    $scope.color = '';
+    // Look for way to clear the input[type=file] element
   };
 });
 ```
@@ -80,10 +77,9 @@ Create a basic form with a file input element
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload> 
+   <form action="/uploads" ng-upload="complete(content)"> 
      <input type="file" name="avatar"></input>
-     <input type="submit" value="Upload" 
-       upload-submit="results(content, completed)"></input>
+     <input type="submit" value="Upload" ng-disabled="$isLoading"></input>
    </form>
  </div>
 </div>
@@ -91,7 +87,7 @@ Create a basic form with a file input element
 
 ### Some rule of thumb
 
-* Any html element that supports the click event can be used to submit the form marked with the __ng-upload__ directive, as long as such elements are marked with the __'upload-submit'__ directive.
+* Any html element that supports the click event can be used to submit the form marked with the __ng-upload__ directive, as long as such elements are marked with the __'upload-submit'__ directive.  If you use an input element with a type of submit then you do not have to mark it with upload-submit.
 * Make sure you import the __'ngUpload'__ module in your angularJS application.
 
 Applying this rules, the sample above can be re-written as
@@ -99,9 +95,9 @@ Applying this rules, the sample above can be re-written as
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload> 
+   <form action="/uploads" ng-upload="completed(content)"> 
      <input type="file" name="avatar"></input>
-     <div style='cursor: pointer' upload-submit="results(content, completed)">Upload with Div</div> &bull;
+     <div style='cursor: pointer' upload-submit>Upload with Div</div> &bull;
    </form>
  </div>
 </div>
@@ -112,10 +108,10 @@ or
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload> 
+   <form action="/uploads" ng-upload="complete(contents)"> 
      <input type="file" name="avatar"></input>
      <a href='javascript:void(0)' 
-       class="upload-submit: results(contents, completed)" >
+       class="upload-submit" >
          Upload with Anchor</a>
    </form>
  </div>
@@ -129,14 +125,8 @@ The AngularJS controller for the above samples is given as:
 ``` js
 angular.module('app', ['ngUpload'])
   .controller('mainCtrl', function($scope) {
-    $scope.results = function(content, completed) {
-      if (completed && content.length > 0)
-        console.log(content); // process content
-      else
-      {
-        // 1. ignore content and adjust your model to show/hide UI snippets; or
-        // 2. show content as an _operation progress_ information
-      }
+    $scope.complete = function(content) {
+      console.log(content); // process content
     }
 });
 ```
@@ -153,13 +143,11 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
 * `upload-options-enable-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
                                by adding a hidden form field with the csrf token.
 
+* `ng-upload-loading`: function that gets triggered when the upload starts.
+
 ### uploadSubmit
 
-* `upload-options-enable-controls`: Whether to enable the submit button when uploading forms.
 * `upload-options-convert-hidden`: Set the value of hidden inputs to their `ng-model` attribute when the form is submitted.
-
-
-
 
 ## Example
 
