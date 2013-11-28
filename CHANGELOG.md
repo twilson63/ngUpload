@@ -1,3 +1,8 @@
+# 0.5.1
+
+* Form now submits on [enter]
+* modified the dsl to a simplier pattern
+
 # 0.5.0
 * Removed disabled and validated works in 1.2 
 
