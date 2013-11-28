@@ -1,3 +1,6 @@
+# 0.5.0
+* Removed disabled and validated works in 1.2 
+
 # 0.4.0
 * Same as 0.3.21 just bumped to stable branch all new modifications will 
 occur on 0.5.x 
