@@ -112,6 +112,10 @@ angular.module('ngUpload', [])
             options.enableRailsCsrf = attrs.uploadOptionsEnableRailsCsrf != "false";
         }
 
+        if ( attrs.hasOwnProperty( "uploadOptionsBeforeSubmit" ) ) {
+            options.beforeSubmit = $parse(attrs.uploadOptionsBeforeSubmit);
+        }
+
         element.attr({
           'target': 'upload-iframe-' + iframeID,
           'method': 'post',
@@ -142,6 +146,8 @@ angular.module('ngUpload', [])
 
         // Start upload
         element.bind('submit', function uploadStart() {
+          // perform check before submit file
+          if (options.beforeSubmit) { return !options.beforeSubmit(); }
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
             angular.forEach(element.find('input'), function(element) {
