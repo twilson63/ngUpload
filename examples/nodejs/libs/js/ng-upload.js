@@ -51,7 +51,7 @@ angular.module('ngUpload', [])
                 //    convertHidden
                 // }
                 var options = {};
-                options.enableControls = attrs.uploadOptionsEnableControls;
+                // options.enableControls = attrs.uploadOptionsEnableControls;
 
                 if ( attrs.hasOwnProperty( "uploadOptionsConvertHidden" ) ) {
                     // Allow blank or true
@@ -75,13 +75,9 @@ angular.module('ngUpload', [])
 
                 element.bind('click', function($event) {
                     // prevent default behavior of click
-                    if ($event) {
-                        $event.preventDefault = true;
-                    }
+                    if ($event) { $event.preventDefault(); }
 
-                    if (element.attr('disabled')) {
-                        return;
-                    }
+                    if (element.attr('disabled')) { return; }
 
                     if ( undefined !== options.beforeSubmitCallback ) {
                         var continueSubmit = scope.$apply(function () {
@@ -90,7 +86,7 @@ angular.module('ngUpload', [])
 
                         // If beforeSubmit callback returns false, skip
                         if ( continueSubmit === false ) {
-                            return;
+                            return false;
                         }
                     }
 
@@ -106,7 +102,10 @@ angular.module('ngUpload', [])
                         // http://bugs.jquery.com/ticket/13936
                         var nativeIframe = iframe[0];
                         var iFrameDoc = nativeIframe.contentDocument || nativeIframe.contentWindow.document;
-                        var content = iFrameDoc.body.innerHTML;
+
+                        // Cross browser text (sans html) retrieval from the iframe - http://www.quirksmode.org/dom/w3c_html.html
+                        var content = iFrameDoc.body.innerText || iFrameDoc.body.textContent;
+
                         try {
                             content = JSON.parse(content);
                         } catch (e) {
@@ -125,10 +124,12 @@ angular.module('ngUpload', [])
                         if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
                             setTimeout(function () { iframe.remove(); }, 250);
                         }
-                        element.attr('disabled', null);
-                        element.attr('title', 'Click to start upload.');
+                        // issue #78 - give developer control
+                        //element.attr('disabled', null);
+                        //element.attr('title', 'Click to start upload.');
                     });
 
+                    // fires the attached function when the upload starts
                     if (!scope.$$phase) {
                         scope.$apply(function () {
                             fn(scope, {content: "Please wait...", completed: false });
@@ -137,14 +138,15 @@ angular.module('ngUpload', [])
                         fn(scope, {content: "Please wait...", completed: false });
                     }
 
-                    var enabled = true;
-                    if (!options.enableControls) {
-                        // disable the submit control on click
-                        element.attr('disabled', 'disabled');
-                        enabled = false;
-                    }
+                    // removed via issue #78
+                    // var enabled = true;
+                    // if (!options.enableControls) {
+                    //     // disable the submit control on click
+                    //     element.attr('disabled', 'disabled');
+                    //     enabled = false;
+                    // }
                     // why do we need this???
-                    element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
+                    // element.attr('title', (enabled ? '[ENABLED]: ' : '[DISABLED]: ') + 'Uploading, please wait...');
 
                     // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
                     if (options.convertHidden) {

@@ -33,39 +33,16 @@
                     <input type="file" name="file" />
                 </p>
                 <p>
-                    <input upload-submit="bar(content)" type="submit" class="btn" value="Submit" />
+                    <input upload-submit="bar(content, completed)" type="submit" class="btn" value="Submit" ng-disabled="disabled" />
                     <br />
-                    <i>Button is <b>disabled</b> during upload, by default. (See Example 2 to change this).</i>
+                    <i>Button is not <b>disabled</b> during upload. (version 0.5 and greater).</i>
+                    You can disable by using <b>ng-disabled</b>
                 </p>
             </form>
-            <div class="alert alert-info">Server Response: <div ng-bind-html-unsafe="uploadResponse"</div></div>
+            <div class="alert alert-info">Server Response: <div>{{uploadResponse}}</div></div>
         </div>
         <div ng-controller="Example2Ctrl">
-            <h1>Example 2 - Using Options: <b>uploadOptionsEnableControls</b> option (requirement: v0.1.1 and above)</h1>
-            Add or remove this option to enable or disable the submit control(s) during file upload, respectively.
-            <br />
-            <span>Note that this can also be written as:<br />
-                <ul>
-                    <li>upload-options-enable-controls; or </li>
-                    <li>uploadOptionsEnableControls</li>
-                </ul>
-                It is absent by default; hence, submit controls(s) will be disabled while upload is in progress. In this example, uploadOptionsEnableButtons is present or set, which means the submit button will be enabled during the upload.
-            </span>
-            <br />
-            <br />
-            <form ng-upload action="/upload?delay=yes" upload-options-enable-controls>
-                <p>
-                    <label>Select a file to upload:</label>
-                    <input type="file" name="file" />
-                </p>
-                <p>
-                    <input type="submit" class="btn" value="Submit" upload-submit="uploadFile(content, completed)" />
-                </p>
-            </form>
-            <div class="alert alert-info">Server Response: <div ng-bind-html-unsafe="uploadResponse"</div></div>
-        </div>
-        <div ng-controller="Example3Ctrl">
-            <h1>Example 3 - Submitting forms with any html element (requirement: v0.1.1 and above)</h1>
+            <h1>Example 2 - Submitting forms with any html element (requirement: v0.1.1 and above)</h1>
             <span>This examples show how to use any html element to submit your form.  It makes use of a 'div', an 'a', and an 'img' tags to submit the same form.</span>
             <br />
             <form ng-upload action="/upload?delay=yes">
@@ -91,11 +68,11 @@
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse}}</div>
         </div>
-        <div ng-controller="Example4Ctrl">
-            <h1>Example 4 - Processing Callback Function Contents (requirement: v0.2.0 and above)</h1>
+        <div ng-controller="Example3Ctrl">
+            <h1>Example 3 - Processing Callback Function Contents (requirement: v0.2.0 and above)</h1>
             Make use of the additional callback status information to decide what to do with the content.
             <br /><br />
-            <span style="font-size: 15px">Example 4.1: The example below displays all statuses, without inspection.</span>
+            <span style="font-size: 15px">Example 3.1: The example below displays all statuses, without inspection.</span>
             <br /><br />
             <form ng-upload action="/upload?delay=yes">
                 <p>
@@ -108,7 +85,7 @@
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse1}}</div>
             <br />
-            <span style="font-size: 15px">Example 4.2: The example below displays only the server response, ignoring other contents</span>
+            <span style="font-size: 15px">Example 3.2: The example below displays only the server response, ignoring other contents</span>
             <br /><br />
             <form ng-upload action="/upload?delay=yes">
                 <p>
@@ -121,8 +98,8 @@
             </form>
             <div class="alert alert-info">Server Response: {{uploadResponse2}}</div>
         </div>
-        <div ng-controller="Example5Ctrl">
-            <h1>Example 5 - Processing a full form (requirement: v0.2.0)</h1>
+        <div ng-controller="Example4Ctrl">
+            <h1>Example 4 - Processing a full form (requirement: v0.2.0)</h1>
             Post a full form with a file and other inputs (text, etc) to the server and get a JSON result.
             <br /><br />
             <form action="/upload-full-form" ng-upload>
@@ -163,34 +140,29 @@
         var app = angular.module('ngUploadApp', ['ngUpload']);
         app.controller('Example1Ctrl', function ($scope) {
             $scope.foo = "Hello World";
-            $scope.bar = function(content) {
-                console.log(content);
+            $scope.disabled = false;
+            $scope.bar = function(content, completed) {
+                if (console) console.log(content);
+                $scope.disabled = !completed;
                 $scope.uploadResponse = content.msg;
             }
         });
 
         app.controller('Example2Ctrl', function ($scope) {
             $scope.uploadFile = function (content) {
-                console.log(content);
+                if (console) console.log(content);
                 $scope.uploadResponse = content.msg;
             }
         });
 
         app.controller('Example3Ctrl', function ($scope) {
-            $scope.uploadFile = function (content) {
-                console.log(content);
-                $scope.uploadResponse = content.msg;
-            }
-        });
-
-        app.controller('Example4Ctrl', function ($scope) {
             $scope.uploadFile1 = function (content, completed) {
-                console.log(content);
+                if (console) console.log(content);
                 $scope.uploadResponse1 = content.msg;
             };
 
             $scope.uploadFile2 = function (content, completed) {
-                console.log(content);
+                if (console) console.log(content);
                 if (completed)
                     $scope.uploadResponse2 = "[Status: Completed] " + content.msg;
                 else
@@ -198,11 +170,11 @@
             }
         });
 
-        app.controller('Example5Ctrl', function ($scope) {
+        app.controller('Example4Ctrl', function ($scope) {
             $scope.uploadComplete = function (content, completed) {
                 if (completed && content)
                 {
-                  console.log(content);
+                  if (console) console.log(content);
                     $scope.response = content; // Presumed content is a json string!
                     $scope.response.style = {
                         color: $scope.response.color,
