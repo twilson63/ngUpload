@@ -200,10 +200,6 @@ angular.module('ngUpload', [])
           } else {
              fn(scope, { content: content});
           }
-          // remove iframe
-          if (content !== "") { // Fixes a bug in Google Chrome that dispose the iframe before content is ready.
-             setTimeout(function () { iframe.remove(); }, 250);
-          }
         });
       }
     };
