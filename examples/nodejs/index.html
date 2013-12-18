@@ -138,9 +138,10 @@
         </div>
       </div>
     </div><!-- <script src="libs/js/jquery-1.9.1.min.js"></script> -->
-    <script src="libs/js/angular.min.js" type="text/javascript">
-</script><script src="libs/js/ng-upload.js" type="text/javascript">
-</script><script type="text/javascript">
+    <script src="libs/js/angular.min.js" type="text/javascript"></script>
+    <script src="libs/js/ng-upload.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
     // TODO add ng-upload module
         var app = angular.module('ngUploadApp', ['ngUpload']);
         app.controller('Example1Ctrl', function ($scope) {
@@ -169,7 +170,7 @@
               if (console) console.log(content);
               $scope.uploadResponse1 = content.msg;
           };
-          
+
           $scope.uploadFile2 = function (content) {
               if (console) console.log(content);
               $scope.uploadResponse2 = "[Status: Completed] " + content.msg;
@@ -187,7 +188,7 @@
                   color: $scope.response.color,
                   "font-weight": "bold"
               };
-              
+
               // Clear form (reason for using the 'ng-model' directive on the input elements)
               $scope.fullname = '';
               $scope.gender = '';
