@@ -1,6 +1,6 @@
 # ngUpload
 
-An AngularJS file upload directive.  
+An AngularJS file upload directive.  [Demo](http://ng-upload.eu01.aws.af.cm/).
 
 ## 0.5.5 - for updates see CHANGELOG.md
 
