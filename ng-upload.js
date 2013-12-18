@@ -143,19 +143,18 @@ angular.module('ngUpload', [])
         element.after(iframe);
 
         setLoadingState(false);
-
         // Start upload
         element.bind('submit', function uploadStart() {
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
-            angular.forEach(element.find('input'), function(element) {
-              element = angular.element(element);
-              if (element.attr('ng-model') &&
-                element.attr('type') &&
-                element.attr('type') == 'hidden') {
-                element.attr('value', scope.$eval(element.attr('ng-model')));
+            angular.forEach(element.find('input'), function(el) {
+              var _el = angular.element(el);
+              if (_el.attr('ng-model') &&
+                _el.attr('type') &&
+                _el.attr('type') == 'hidden') {
+                _el.attr('value', scope.$eval(_el.attr('ng-model')));
               }
             });
           }

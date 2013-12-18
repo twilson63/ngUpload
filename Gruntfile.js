@@ -39,7 +39,7 @@ module.exports = function(grunt) {
       unit: {
         options: {
           frameworks: ['jasmine'],
-          browsers: ['Chrome'],
+          browsers: ['Chrome','Firefox'],
           files: [
             'libs/jquery-1.9.1.min.js',
             'libs/angular.js',

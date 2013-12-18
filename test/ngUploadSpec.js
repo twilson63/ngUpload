@@ -30,8 +30,9 @@ describe('ngUpload', function() {
     expect(form.attr('method')).toBe('post');
   });
   it('should set value from ng-model attribute for non-hidden fields', function() {
-      var submit = elm[0].getElementsByClassName('submit-button')[0];
-      submit.click();
+      var form = elm.find('form');
+      //var submit = elm[0].getElementsByClassName('submit-button')[0];
+      form.submit();
 
       expect(angular.element(elm[0].getElementsByClassName('title-input')[0]).val()).toEqual( scope.test.title );
       expect(angular.element(elm[0].getElementsByClassName('secret-input')[0]).val()).toEqual('');

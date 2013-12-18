@@ -143,8 +143,7 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
 * `upload-options-enable-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
                                by adding a hidden form field with the csrf token.
 
-* `ng-upload-loading`: function that gets triggered when the upload starts.
-* `ng-upload-before-submit`: function that gets triggered before the upload starts and if the function returns false it will cancel the submit.
+* `upload-before-submit`: function that gets triggered before the upload starts and if the function returns false it will cancel the submit.
 
 ### uploadSubmit
 

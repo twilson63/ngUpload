@@ -1,3 +1,7 @@
+# 0.5.3
+
+* Fixed issue with firefox #90
+
 # 0.5.2
 
 * Fixed issue with second re-submit
