@@ -6,11 +6,11 @@
 //
 // <div ng-app="app">
 //   <div ng-controller="mainCtrl">
-//    <form action="/uploads"
-//      ng-upload="completed(content)">
+//    <form ng-attr-action="/uploads" 
+//      ng-upload="completed(content)"> 
 //      ng-upload-loading="loading()"
 //      <input type="file" name="avatar"></input>
-//      <input type="submit" value="Upload"
+//      <input type="submit" value="Upload" 
 //         ng-disabled="$isUploading"></input>
 //    </form>
 //  </div>
@@ -78,16 +78,6 @@ angular.module('ngUpload', [])
         // Give each directive instance a new id
         iframeID++;
 
-        function getActionAttrValue() {
-          var action = element.attr('action');
-          var separator = action.indexOf('?') === -1 ? '?' : '&';
-          var tStamp = +(new Date());
-
-          // Append a timestamp field to the url
-          // to prevent browser caching results
-          return action + separator + '_t=' + tStamp;
-        }
-
         function setLoadingState(state) {
           scope.$isUploading = state;
         }
@@ -119,7 +109,6 @@ angular.module('ngUpload', [])
         element.attr({
           'target': 'upload-iframe-' + iframeID,
           'method': 'post',
-          'action': getActionAttrValue(),
           'enctype': 'multipart/form-data',
           'encoding': 'multipart/form-data'
         });
