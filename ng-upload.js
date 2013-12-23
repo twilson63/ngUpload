@@ -133,6 +133,9 @@ angular.module('ngUpload', [])
         setLoadingState(false);
         // Start upload
         element.bind('submit', function uploadStart() {
+          // if form is invalid don't submit (e.g. keypress 13)
+          if(scope[attrs.name].$invalid) return false;
+
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
