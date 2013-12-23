@@ -133,8 +133,9 @@ angular.module('ngUpload', [])
         setLoadingState(false);
         // Start upload
         element.bind('submit', function uploadStart() {
+          var formController = scope[attrs.name];
           // if form is invalid don't submit (e.g. keypress 13)
-          if(scope[attrs.name].$invalid) return false;
+          if(formController.$invalid || formController.$pristine) return false;
 
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
