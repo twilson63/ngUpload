@@ -73,7 +73,6 @@ angular.module('ngUpload', [])
 
     return {
       restrict: 'AC',
-      scope: true,
       link: function (scope, element, attrs) {
         // Give each directive instance a new id
         iframeID++;
