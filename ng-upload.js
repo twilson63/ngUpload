@@ -49,7 +49,7 @@ angular.module('ngUpload', [])
 
           if (element.attr('disabled')) { return; }
           var form = getParentNodeByTagName(element, 'form');
-          form[0].submit();
+          form.trigger('submit');
         });
       }
     };
