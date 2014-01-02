@@ -146,7 +146,7 @@ angular.module('ngUpload', [])
         // Start upload
         element.bind('submit', function uploadStart() {
           // perform check before submit file
-          if (options.beforeSubmit) { return options.beforeSubmit(); }
+          if (options.beforeSubmit) { return options.beforeSubmit(scope); }
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
             angular.forEach(element.find('input'), function(el) {
