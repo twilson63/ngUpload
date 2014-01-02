@@ -14,6 +14,7 @@ describe('ngUpload', function() {
     $compile(elm)(scope);
     //scope.digest();
   }));
+
   it('should set form upload attributes', function() {
     var form = elm.find('form');
     expect(form).toBeDefined();
