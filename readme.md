@@ -1,6 +1,6 @@
 # ngUpload
 
-An AngularJS file upload directive.  
+An AngularJS file upload directive.
 
 ## 0.5.5 - for updates see CHANGELOG.md
 
@@ -61,7 +61,7 @@ app.controller('Example5Ctrl', function ($scope) {
 ## Install with Bower
 
 ```
-bower install ngUpload 
+bower install ngUpload
 ```
 
 ## Usage
@@ -77,7 +77,7 @@ Create a basic form with a file input element
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="complete(content)"> 
+   <form action="/uploads" ng-upload="complete(content)">
      <input type="file" name="avatar"></input>
      <input type="submit" value="Upload" ng-disabled="$isLoading"></input>
    </form>
@@ -95,7 +95,7 @@ Applying this rules, the sample above can be re-written as
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="completed(content)"> 
+   <form action="/uploads" ng-upload="completed(content)">
      <input type="file" name="avatar"></input>
      <div style='cursor: pointer' upload-submit>Upload with Div</div> &bull;
    </form>
@@ -108,9 +108,9 @@ or
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="complete(contents)"> 
+   <form action="/uploads" ng-upload="complete(contents)">
      <input type="file" name="avatar"></input>
-     <a href='javascript:void(0)' 
+     <a href='javascript:void(0)'
        class="upload-submit" >
          Upload with Anchor</a>
    </form>
@@ -140,10 +140,10 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
 
 ### ngUpload
 
-* `upload-options-enable-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf) 
+* `upload-options-enable-rails-csrf`: Turns on support for [Rails' CSRF](http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf)
                                by adding a hidden form field with the csrf token.
 
-* `upload-before-submit`: function that gets triggered before the upload starts and if the function returns false it will cancel the submit.
+* `upload-options-before-submit`: function that gets triggered before the upload starts and if the function returns false it will cancel the submit.
 
 ### uploadSubmit
 

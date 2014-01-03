@@ -45,10 +45,14 @@ angular.module('ngUpload', [])
       link: function(scope, element, attrs) {
         element.bind('click', function($event) {
           // prevent default behavior of click
-          if ($event) { $event.preventDefault(); }
+          if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+          }
 
           if (element.attr('disabled')) { return; }
           var form = getParentNodeByTagName(element, 'form');
+          form.triggerHandler('submit');
           form[0].submit();
         });
       }
@@ -146,7 +150,10 @@ angular.module('ngUpload', [])
         // Start upload
         element.bind('submit', function uploadStart() {
           // perform check before submit file
-          if (options.beforeSubmit) { return options.beforeSubmit(); }
+          if (options.beforeSubmit && options.beforeSubmit(scope) === false) {
+            return false;
+          }
+
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
             angular.forEach(element.find('input'), function(el) {
