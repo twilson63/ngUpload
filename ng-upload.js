@@ -45,11 +45,15 @@ angular.module('ngUpload', [])
       link: function(scope, element, attrs) {
         element.bind('click', function($event) {
           // prevent default behavior of click
-          if ($event) { $event.preventDefault(); }
+          if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+          }
 
           if (element.attr('disabled')) { return; }
           var form = getParentNodeByTagName(element, 'form');
-          form.trigger('submit');
+          form.triggerHandler('submit');
+          form[0].submit();
         });
       }
     };
