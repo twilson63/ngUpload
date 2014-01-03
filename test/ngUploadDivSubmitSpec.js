@@ -23,7 +23,7 @@ describe('ngUpload', function() {
     expect(form.attr('encoding')).toBe('multipart/form-data');
     expect(form.attr('target')).toBe('upload-iframe-2');
     expect(form.attr('method')).toBe('post');
-    
+
 
   });
 
@@ -36,9 +36,9 @@ describe('ngUpload', function() {
 
   it('should send submit event to the form', function() {
     var submit = elm[0].getElementsByClassName('baz')[0];
-    var form = elm[0];
+    var form = elm.find('form');
     var spy = jasmine.createSpy('submitSpy');
-    elm.bind('submit', spy);
+    form.bind('submit', spy);
     submit.click();
     expect(spy).toHaveBeenCalled();
   });
