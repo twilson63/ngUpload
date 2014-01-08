@@ -139,6 +139,10 @@ angular.module('ngUpload', [])
 
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
+
+          // bind load after submit to prevent initial load triggering uploadEnd
+          iframe.bind('load', uploadEnd);
+
           // If convertHidden option is enabled, set the value of hidden fields to the eval of the ng-model
           if (options.convertHidden) {
             angular.forEach(element.find('input'), function(el) {
@@ -163,7 +167,7 @@ angular.module('ngUpload', [])
         });
 
         // Finish upload
-        iframe.bind('load', function uploadEnd() {
+       function uploadEnd() {
           if (!scope.$$phase) {
             scope.$apply(function() {
               setLoadingState(false);
@@ -191,7 +195,7 @@ angular.module('ngUpload', [])
           } else {
              fn(scope, { content: content});
           }
-        });
+        };
       }
     };
   }]);
