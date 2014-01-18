@@ -18,7 +18,7 @@ describe('ngUpload', function() {
     it('should run before_submit callback', function() {
         scope.before_submit = function($scope) {
             $scope.before_submit_called = true;
-        }
+        };
 
         var form = elm.find('form');
         expect(form).toBeDefined();
@@ -29,14 +29,14 @@ describe('ngUpload', function() {
         var iframe = elm.find('#upload_iframe');
         expect(iframe[0]).toBeDefined();
 
-        expect(scope.before_submit_called).toBe(true)
+        expect(scope.before_submit_called).toBe(true);
     });
 
     it('should run before_submit callback and stop submit', function() {
         scope.before_submit = function($scope) {
             $scope.before_submit_called = true;
             return false;
-        }
+        };
 
         var form = elm.find('form');
         expect(form).toBeDefined();
@@ -47,6 +47,6 @@ describe('ngUpload', function() {
         var iframe = elm.find('#upload_iframe');
         expect(iframe[0]).not.toBeDefined();
 
-        expect(scope.before_submit_called).toBe(true)
+        expect(scope.before_submit_called).toBe(true);
     });
 });

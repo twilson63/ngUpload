@@ -10,7 +10,7 @@
 //      ng-upload="completed(content)"> 
 //      ng-upload-loading="loading()"
 //      <input type="file" name="avatar"></input>
-//      <input type="submit" value="Upload" 
+//      <input type="submit" value="Upload"
 //         ng-disabled="$isUploading"></input>
 //    </form>
 //  </div>
@@ -45,10 +45,14 @@ angular.module('ngUpload', [])
       link: function(scope, element, attrs) {
         element.bind('click', function($event) {
           // prevent default behavior of click
-          if ($event) { $event.preventDefault(); }
+          if ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+          }
 
           if (element.attr('disabled')) { return; }
           var form = getParentNodeByTagName(element, 'form');
+          form.triggerHandler('submit');
           form[0].submit();
         });
       }
