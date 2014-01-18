@@ -135,7 +135,7 @@ angular.module('ngUpload', [])
         element.bind('submit', function uploadStart() {
           var formController = scope[attrs.name];
           // if form is invalid don't submit (e.g. keypress 13)
-          if(formController.$invalid || formController.$pristine) return false;
+          if(formController && (formController.$invalid || formController.$pristine)) return false;
 
           // perform check before submit file
           if (options.beforeSubmit) { return options.beforeSubmit(); }
@@ -195,7 +195,7 @@ angular.module('ngUpload', [])
           } else {
              fn(scope, { content: content});
           }
-        };
+        }
       }
     };
   }]);
