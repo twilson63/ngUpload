@@ -1,3 +1,7 @@
+# 0.5.7
+
+* Fixed upload issue #96, no need to check $pristine
+
 # 0.5.3
 
 * Fixed issue with firefox #90
