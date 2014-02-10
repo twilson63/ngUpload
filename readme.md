@@ -147,7 +147,21 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
 
 ### uploadSubmit
 
-* `upload-options-convert-hidden`: Set the value of hidden inputs to their `ng-model` attribute when the form is submitted.
+* `upload-options-convert-hidden`: Set the value of hidden inputs to their `ng-model` attribute when the form is submitted.  One situation in which this is useful is when
+using select elements whose options are generated with ngOptions, for
+example: 
+```
+select[name='category_id' ng-model='category' ng-options='c.id as c.name for c in categories']
+```
+and where categories is
+```
+[{id: 12, name: 'fred'}, {id: 65, name: 'wilma'}]
+```
+Because Angular will generate options whose HTML element value is indexed on 0, the value submitted will be the value of the
+option and not the desired ng-model value which is category.id.  Adding
+a hidden element whose ng-model matches the ng-model of the select
+element, combined with
+upload-options-convert-hidden='true' will workaround this issue.
 
 ## Example
 
