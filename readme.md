@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive. Demo [http://ngupload.herokuapp.com](http://ngupload.herokuapp.com)
 
-## 0.5.7 - for updates see CHANGELOG.md
+## 0.5.8 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload="uploadComplete(content)" action="/upload-full-form">

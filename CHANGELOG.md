@@ -1,3 +1,8 @@
+# 0.5.8
+
+* Added more readme info #98
+* Fixed issue with binding to the load event #100
+
 # 0.5.7
 
 * Fixed upload issue #96, no need to check $pristine
