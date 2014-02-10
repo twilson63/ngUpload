@@ -172,7 +172,7 @@ angular.module('ngUpload', [])
         // Finish upload
        function uploadEnd() {
           // unbind load after uploadEnd to prevent another load triggering uploadEnd
-          iframe.bind('load', uploadEnd);
+          iframe.unbind('load');
           if (!scope.$$phase) {
             scope.$apply(function() {
               setLoadingState(false);
