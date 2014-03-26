@@ -6,11 +6,11 @@
 //
 // <div ng-app="app">
 //   <div ng-controller="mainCtrl">
-//    <form ng-attr-action="/uploads" 
-//      ng-upload="completed(content)"> 
+//    <form ng-attr-action="/uploads"
+//      ng-upload="completed(content)">
 //      ng-upload-loading="loading()"
 //      <input type="file" name="avatar"></input>
-//      <input type="submit" value="Upload" 
+//      <input type="submit" value="Upload"
 //         ng-disabled="$isUploading"></input>
 //    </form>
 //  </div>
@@ -92,7 +92,7 @@ angular.module('ngUpload', [])
         //    // add the Rails CSRF hidden input to form
         //    enableRailsCsrf: bool
         // }
-        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : null;
+        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : angular.noop;
         var loading = attrs.ngUploadLoading ? $parse(attrs.ngUploadLoading) : null;
 
         if ( attrs.hasOwnProperty( "uploadOptionsConvertHidden" ) ) {
