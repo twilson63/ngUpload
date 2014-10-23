@@ -137,12 +137,18 @@ angular.module('ngUpload', [])
 
         setLoadingState(false);
         // Start upload
-        element.bind('submit', function uploadStart() {
+        element.bind('submit', function uploadStart($event) {
           var formController = scope[attrs.name];
           // if form is invalid don't submit (e.g. keypress 13)
-          if(formController && formController.$invalid) return false;
+          if(formController && formController.$invalid) {
+            $event.preventDefault();
+            return false;
+          }
           // perform check before submit file
-          if (options.beforeSubmit && options.beforeSubmit(scope, {}) === false) return false;
+          if (options.beforeSubmit && options.beforeSubmit(scope, {}) === false) {
+            $event.preventDefault();
+            return false;
+          }
 
           // bind load after submit to prevent initial load triggering uploadEnd
           iframe.bind('load', uploadEnd);
