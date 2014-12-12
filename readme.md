@@ -23,7 +23,7 @@ An AngularJS file upload directive. Demo [http://ngupload.herokuapp.com](http://
            <input type="file" name="file" />
        </p>
        <p>
-           <input type="submit" class="btn" value="Submit" ng-disabled="$isLoading"  />
+           <input type="submit" class="btn" value="Submit" ng-disabled="$isUploading"  />
        </p>
    </form>
    <div class="alert alert-info">Server Response: {{response | json}}</div>
@@ -79,7 +79,7 @@ Create a basic form with a file input element
   <div ng-controller="mainCtrl">
    <form action="/uploads" ng-upload="complete(content)">
      <input type="file" name="avatar"></input>
-     <input type="submit" value="Upload" ng-disabled="$isLoading"></input>
+     <input type="submit" value="Upload" ng-disabled="$isUploading"></input>
    </form>
  </div>
 </div>
