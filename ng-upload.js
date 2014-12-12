@@ -93,6 +93,7 @@ angular.module('ngUpload', [])
         //    enableRailsCsrf: bool
         // }
         var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : angular.noop;
+        var errorCatcher = attrs.errorCatcher ? $parse(attrs.errorCatcher) : null;
         var loading = attrs.ngUploadLoading ? $parse(attrs.ngUploadLoading) : null;
 
         if ( attrs.hasOwnProperty( "uploadOptionsConvertHidden" ) ) {
@@ -180,25 +181,37 @@ angular.module('ngUpload', [])
           } else {
             setLoadingState(false);
           }
-          // Get iframe body contents
-          var bodyContent = (iframe[0].contentDocument ||
-            iframe[0].contentWindow.document).body;
-          var content;
           try {
-            content = angular.fromJson(bodyContent.innerText || bodyContent.textContent);
-          } catch (e) {
-            // Fall back to html if json parse failed
-            content = bodyContent.innerHTML;
-            $log.warn('Response is not valid JSON');
-          }
-          // if outside a digest cycle, execute the upload response function in the active scope
-          // else execute the upload response function in the current digest
-          if (!scope.$$phase) {
-             scope.$apply(function () {
-                 fn(scope, { content: content});
-             });
-          } else {
-            fn(scope, { content: content});
+            // Get iframe body contents
+            var bodyContent = (iframe[0].contentDocument ||
+              iframe[0].contentWindow.document).body;
+            var content;
+            try {
+              content = angular.fromJson(bodyContent.innerText || bodyContent.textContent);
+            } catch (e) {
+              // Fall back to html if json parse failed
+              content = bodyContent.innerHTML;
+              $log.warn('Response is not valid JSON');
+            }
+            // if outside a digest cycle, execute the upload response function in the active scope
+            // else execute the upload response function in the current digest
+            if (!scope.$$phase) {
+               scope.$apply(function () {
+                   fn(scope, { content: content});
+               });
+            } else {
+              fn(scope, { content: content});
+            }
+          } catch (error) {
+            if (errorCatcher) {
+              if (!scope.$$phase) {
+                scope.$apply(function() {
+                  errorCatcher(scope, { error: error });
+                });
+              } else {
+                errorCatcher(scope, { error: error });
+              }
+            }
           }
         }
       }
