@@ -6,11 +6,11 @@
 //
 // <div ng-app="app">
 //   <div ng-controller="mainCtrl">
-//    <form ng-attr-action="/uploads"
-//      ng-upload="completed(content)">
+//    <form ng-attr-action="/uploads" 
+//      ng-upload="completed(content)"> 
 //      ng-upload-loading="loading()"
 //      <input type="file" name="avatar"></input>
-//      <input type="submit" value="Upload"
+//      <input type="submit" value="Upload" 
 //         ng-disabled="$isUploading"></input>
 //    </form>
 //  </div>
@@ -92,7 +92,7 @@ angular.module('ngUpload', [])
         //    // add the Rails CSRF hidden input to form
         //    enableRailsCsrf: bool
         // }
-        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : angular.noop;
+        var fn = attrs.ngUpload ? $parse(attrs.ngUpload) : null;
         var errorCatcher = attrs.errorCatcher ? $parse(attrs.errorCatcher) : null;
         var loading = attrs.ngUploadLoading ? $parse(attrs.ngUploadLoading) : null;
 
@@ -142,7 +142,7 @@ angular.module('ngUpload', [])
           // if form is invalid don't submit (e.g. keypress 13)
           if(formController && formController.$invalid) return false;
           // perform check before submit file
-          if (options.beforeSubmit && options.beforeSubmit(scope, {}) === false) return false;
+          if (options.beforeSubmit) { return options.beforeSubmit(); }
 
           // bind load after submit to prevent initial load triggering uploadEnd
           iframe.bind('load', uploadEnd);
@@ -181,37 +181,54 @@ angular.module('ngUpload', [])
           } else {
             setLoadingState(false);
           }
+          // Get iframe body contents
           try {
-            // Get iframe body contents
-            var bodyContent = (iframe[0].contentDocument ||
-              iframe[0].contentWindow.document).body;
-            var content;
-            try {
-              content = angular.fromJson(bodyContent.innerText || bodyContent.textContent);
-            } catch (e) {
-              // Fall back to html if json parse failed
-              content = bodyContent.innerHTML;
-              $log.warn('Response is not valid JSON');
-            }
-            // if outside a digest cycle, execute the upload response function in the active scope
-            // else execute the upload response function in the current digest
-            if (!scope.$$phase) {
-               scope.$apply(function () {
-                   fn(scope, { content: content});
-               });
-            } else {
-              fn(scope, { content: content});
-            }
-          } catch (error) {
-            if (errorCatcher) {
-              if (!scope.$$phase) {
-                scope.$apply(function() {
-                  errorCatcher(scope, { error: error });
-                });
-              } else {
-                errorCatcher(scope, { error: error });
+              var bodyContent = (iframe[0].contentDocument ||
+                iframe[0].contentWindow.document).body;
+
+              var content;
+              try {
+                content = angular.fromJson(bodyContent.innerText || bodyContent.textContent);
+                if (!scope.$$phase) {
+                   scope.$apply(function () {
+                       fn(scope, { content: content});
+                   });
+                } else {
+                  fn(scope, { content: content});
+                }
+              } catch (e) {
+                // Fall back to html if json parse failed
+                content = bodyContent.innerHTML;
+                var error = 'ng-upload: Response is not valid JSON';
+                $log.warn(error);
+
+                if ( errorCatcher ){
+                   if (!scope.$$phase) {
+                      scope.$apply(function () {
+                          errorCatcher(scope, { error: error});
+                      });
+                   } else {
+                     errorCatcher(scope, { error: error});
+                   }
+                }
+
               }
+              // if outside a digest cycle, execute the upload response function in the active scope
+              // else execute the upload response function in the current digest
+
+          } catch (error) {
+            $log.warn('ng-upload: Server error');
+
+            if ( errorCatcher ){
+               if (!scope.$$phase) {
+                  scope.$apply(function () {
+                      errorCatcher(scope, { error: error});
+                  });
+               } else {
+                 errorCatcher(scope, { error: error});
+               }
             }
+
           }
         }
       }
