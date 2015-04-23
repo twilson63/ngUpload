@@ -95,7 +95,7 @@ Applying this rules, the sample above can be re-written as
 ``` html
 <div ng-app="app">
   <div ng-controller="mainCtrl">
-   <form action="/uploads" ng-upload="completed(content)">
+   <form action="/uploads" ng-upload="complete(content)">
      <input type="file" name="avatar"></input>
      <div style='cursor: pointer' upload-submit>Upload with Div</div> &bull;
    </form>
