@@ -5,6 +5,7 @@ describe('ngUpload', function() {
     beforeEach(inject(function($rootScope, $compile) {
         elm = angular.element(
             '<div>' +
+            '<input type="text" name="bar" id="bar" ng-model="baz"></input>' +
             '<form action="/upload" ng-upload="foo()" upload-options-before-submit="before_submit()">' +
             '<input type="file" name="foo"></input>' +
             '<input type="submit" value="submit"></input>' +
@@ -43,5 +44,22 @@ describe('ngUpload', function() {
         expect(iframe[0]).not.toBeDefined();
 
         expect(scope.before_submit_called).toBe(true);
+    });
+
+    it('should run a digest cycle when form submit is stopped', function() {
+        scope.before_submit = function() {
+            scope.baz = 'qux';
+            return false;
+        };
+
+        var text = elm.find('input')[0];
+        expect(text.value).toBe('');
+
+        var form = elm.find('form');
+        expect(form).toBeDefined();
+
+        form.submit();
+
+        expect(text.value).toBe('qux');
     });
 });

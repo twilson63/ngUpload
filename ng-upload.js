@@ -146,6 +146,9 @@ angular.module('ngUpload', [])
           }
           // perform check before submit file
           if (options.beforeSubmit && options.beforeSubmit(scope, {}) === false) {
+            if(!scope.$$phase){
+              scope.$apply();
+            }
             $event.preventDefault();
             return false;
           }
