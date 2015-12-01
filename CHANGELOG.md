@@ -1,3 +1,7 @@
+# 0.5.18
+
+Patches applied #129, #127, #123, #119, #110, #100
+
 # 0.5.8
 
 * Added more readme info #98
@@ -21,11 +25,11 @@
 * modified the dsl to a simplier pattern
 
 # 0.5.0
-* Removed disabled and validated works in 1.2 
+* Removed disabled and validated works in 1.2
 
 # 0.4.0
-* Same as 0.3.21 just bumped to stable branch all new modifications will 
-occur on 0.5.x 
+* Same as 0.3.21 just bumped to stable branch all new modifications will
+occur on 0.5.x
 
 # 0.3.21
 
@@ -44,7 +48,7 @@ occur on 0.5.x
 * Modified bower.json to allow for all future versions of angular and
   jquery
 
-# 0.3.14 
+# 0.3.14
 
 * Changed the way content of the upload iframe is obtained...
 
@@ -100,11 +104,11 @@ occur on 0.5.x
 
 Now there are two directives, ng-upload on your upload form and
 upload-submit on your clickable submit object.  This new pattern
-is more angularjs like and you can declare these directives as 
+is more angularjs like and you can declare these directives as
 attributes or classes.
 
 see the examples
- 
+
 
 # 0.2.1
 
@@ -116,7 +120,7 @@ see the examples
 
 * Bug fixes and enahncements (#12 and #13)
 * Addition of an example to demonstrate using ngUpload to submit a full form, with a file input and other types of inputs, to the server.
-* Example also demonstate how to consume a JSON returned by the server in Angular. (Checkout example 5 on the demo page(s) - [ASP.Net MVC](http://ng-upload.azurewebsites.net) or [NodeJS](http://ng-upload.eu01.aws.af.cm/). 
+* Example also demonstate how to consume a JSON returned by the server in Angular. (Checkout example 5 on the demo page(s) - [ASP.Net MVC](http://ng-upload.azurewebsites.net) or [NodeJS](http://ng-upload.eu01.aws.af.cm/).
 
 ## Update 0.1.1
 
@@ -126,7 +130,7 @@ see the examples
 <form ng-upload='callbackFunction(contents, completed)' uploadOptionsEnableControls>
    ...
 </form>
-``` 
+```
 _Submission controls are html elements marked with the **upload-submit** css class_.
 * Some bug fixes.
 

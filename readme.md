@@ -2,7 +2,7 @@
 
 An AngularJS file upload directive. Demo [http://ngupload.herokuapp.com](http://ngupload.herokuapp.com)
 
-## 0.5.8 - for updates see CHANGELOG.md
+## 0.5.18 - for updates see CHANGELOG.md
 
 ``` html
    <form ng-upload="uploadComplete(content)" action="/upload-full-form">
@@ -149,7 +149,7 @@ In order, for ngUpload to respond correctly for IE, your server needs to return 
 
 * `upload-options-convert-hidden`: Set the value of hidden inputs to their `ng-model` attribute when the form is submitted.  One situation in which this is useful is when
 using select elements whose options are generated with ngOptions, for
-example: 
+example:
 ```
 select[name='category_id' ng-model='category' ng-options='c.id as c.name for c in categories']
 ```
