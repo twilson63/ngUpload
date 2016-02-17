@@ -2,7 +2,7 @@
   "name": "ngUpload",
   "version": "0.5.18",
   "description": "An AngularJS Upload File Directive",
-  "main": "index.js",
+  "main": "ng-upload.js",
   "directories": {
     "example": "examples",
     "test": "test"
