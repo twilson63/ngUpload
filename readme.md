@@ -58,6 +58,12 @@ app.controller('Example5Ctrl', function ($scope) {
 
 * AngularJS (http://angularjs.org)
 
+## Install with NPM
+
+```
+npm install ngUpload -S
+```
+
 ## Install with Bower
 
 ```
