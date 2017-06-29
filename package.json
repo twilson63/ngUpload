@@ -1,6 +1,6 @@
 {
   "name": "ngUpload",
-  "version": "0.5.20",
+  "version": "0.5.21",
   "description": "An AngularJS Upload File Directive",
   "main": "ng-upload.js",
   "directories": {
@@ -33,6 +33,5 @@
     "karma": "~0.10.2",
     "grunt-karma": "~0.6.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
