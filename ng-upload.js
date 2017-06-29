@@ -58,8 +58,8 @@ angular.module('ngUpload', [])
       }
     };
   }])
-  .directive('ngUpload', ["$log", "$parse", "$document",
-    function ($log, $parse, $document) {
+  .directive('ngUpload', ["$log", "$parse", "$document", "$browser", "$http",
+    function ($log, $parse, $document, $browser, $http) {
     var iframeID = 1;
     // Utility function to get meta tag with a given name attribute
     function getMetaTagWithName(name) {
@@ -73,6 +73,10 @@ angular.module('ngUpload', [])
       });
 
       return angular.element(match);
+    }
+
+    function getCsrfTokenValue() {
+      return $browser.cookies()[$http.defaults.xsrfCookieName || 'X-XSRF-TOKEN'];
     }
 
     return {
@@ -110,6 +114,11 @@ angular.module('ngUpload', [])
             options.beforeSubmit = $parse(attrs.uploadOptionsBeforeSubmit);
         }
 
+        if ( attrs.hasOwnProperty( "uploadOptionsEnableCsrf" ) ) {
+            // allow for blank or true
+            options.enableCsrf = attrs.uploadOptionsEnableCsrf != "false";
+        }
+
         element.attr({
           'target': 'upload-iframe-' + iframeID,
           'method': 'post',
@@ -133,6 +142,17 @@ angular.module('ngUpload', [])
 
           element.append(input);
         }
+
+        if ( options.enableCsrf ) {
+          var input = angular.element("<input />");
+          input.attr("class", "upload-csrf-token");
+          input.attr("type", "hidden");
+          input.attr("name", attrs.uploadOptionsCsrfParam || 'CSRFToken');
+          input.val(getCsrfTokenValue());
+
+          element.append(input);
+        }
+
         element.after(iframe);
 
         setLoadingState(false);
